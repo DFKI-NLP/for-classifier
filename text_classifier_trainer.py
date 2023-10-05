@@ -89,7 +89,7 @@ def main():
         logging_steps=5,
         per_device_train_batch_size=32,
         per_device_eval_batch_size=32,
-        num_train_epochs=1,
+        num_train_epochs=3,
     )
 
     # Define Trainer
