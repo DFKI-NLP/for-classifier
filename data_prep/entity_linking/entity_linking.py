@@ -5,8 +5,6 @@ import string
 import pandas as pd
 
 import spacy
-from spacy import displacy
-from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 
 from collections import Counter
@@ -15,8 +13,7 @@ from bs4 import BeautifulSoup
 from thefuzz import fuzz
 
 from linking_APIs import EntityLinkingAPIs 
-
-import sparql_dataframe
+from data_prep.utils import get_academicDisciplines
 import torch
 
 
@@ -88,34 +85,6 @@ def simplify_complex_labels(complex_labels):
 
 	return complex_labels_dict
 
-
-def get_academicDisciplines():
-
-    endpoint = "http://dbpedia.org/sparql"
-
-    query = """
-        PREFIX :     <http://dbpedia.org/resource/>
-        PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        PREFIX dbo:  <http://dbpedia.org/ontology/>
-
-        SELECT DISTINCT ?discipline ?label ?abstract
-
-        WHERE {
-        ?subject dbo:academicDiscipline ?discipline .
-        ?discipline rdfs:label ?label ;
-                        dbo:abstract ?abstract .
-        FILTER (LANG(?label)="en") .
-        FILTER (LANG(?abstract)="en") .
-        }
-    """
-
-    # use sparql_dataframe; a library that return results of SPARQL queries as pandas DataFrames
-    academicDisciplines = sparql_dataframe.get(endpoint, query)
-
-    return academicDisciplines
-
-
 def main():
 
     data = pd.read_csv('~/documents/for-classifier/data/forc_I_dataset_FINAL_September.csv')
@@ -148,7 +117,7 @@ def main():
     linked_taxonomy = entity_linker.run()
     print('Sucessfully linked taxonomy!')
 
-    torch.save(linked_taxonomy, '~/documents/for-classifier/data/linked_taxonomy.pt')
+    torch.save(linked_taxonomy, '../../data/linked_taxonomy.pt')
     print('Saved in "/data/linked_taxonomy.pt"')
 
 
