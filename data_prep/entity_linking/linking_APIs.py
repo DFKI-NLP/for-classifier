@@ -38,7 +38,7 @@ class EntityLinkingAPIs:
         print('Got data from FALCON API...')
 
         # link entities that exist as 1:1 matches in academicDisciplines
-        linked_entities = self.link_identical_entities(self.labels, wat_results, lookup_results, falcon_results, self.academicDisciplines)
+        linked_entities = self.link_identical_entities(wat_results, lookup_results, falcon_results)
         print('Linked identical entities...')
 
         # link entities that don't exist as 1:1 matches
@@ -83,7 +83,7 @@ class EntityLinkingAPIs:
         for label in labels:
             
             # Query API
-            resp = req.get("https://lookup.dbpedia.org/api/search?query="+label)
+            resp = req.get("https://lookup.dbpedia.org/api/search?query="+label+"&maxResults=5")
             resp_text = resp.text
             # Convert it to BeautifulSoup XML
             beautsoup_rf = BeautifulSoup(resp_text, "xml")
@@ -170,7 +170,7 @@ class EntityLinkingAPIs:
                     
         return linked_labels
     
-    def link_identical_entities(self, labels: list, wat_results: dict, lookup_results: dict, falcon_results: dict) -> dict:
+    def link_identical_entities(self, wat_results: dict, lookup_results: dict, falcon_results: dict) -> dict:
         """
         A function that iterated through the API results of 1. WAT API, 2. DBpedia Lookup, and 3. FALCON API
         and gets identical resources from DBpedia that also exist in the dbo:academicDisciplines list.
@@ -178,22 +178,22 @@ class EntityLinkingAPIs:
         """
     
         # this will be the returned dictionary which contains all linked identical entities
-        linked_entities = {el: [] for el in all_labels}
+        linked_entities = {el: [] for el in self.labels}
     
         # get identical entities from WAT API
         for key, value in wat_results.items():
             if linked_entities[key] == []:
-                linked_entities[key] = get_identical_entity(key, value, self.academicDisciplines)
+                linked_entities[key] = self.get_identical_entity(key, value)
             
         # get identical entities from DBpedia Lookup
         for key, value in lookup_results.items():
             if linked_entities[key] == []:
-                linked_entities[key] = get_identical_entity(key, value, self.academicDisciplines)
+                linked_entities[key] = self.get_identical_entity(key, value)
             
         # get identical entities from FALCON API
         for key, value in falcon_results.items():
             if linked_entities[key] == []:
-                linked_entities[key] = get_identical_entity(key, value, self.academicDisciplines)
+                linked_entities[key] = self.get_identical_entity(key, value)
                 
         return linked_entities
     
@@ -251,7 +251,7 @@ class EntityLinkingAPIs:
             # for entities that are still not linked
             if linked_entities[key] == {}:
                 linked_entities[key] = {
-                    self.get_fuzzy_match(key, self.academicDisciplines): 1
+                    self.get_fuzzy_match(key): 1
                 }
                 
         return linked_entities

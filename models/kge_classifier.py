@@ -112,10 +112,10 @@ def prepare_dataset(document_text, class_kges, class_text, labels, tokenizer):
 
 def main():
     # Load dataset
-    document_text = torch.load('/netscratch/abu/classifier_data/September/document_text_list_3_neg.pt')
-    class_kges = torch.load('/netscratch/abu/classifier_data/September/class_kge_3_neg.pt')
-    class_text = torch.load('/netscratch/abu/classifier_data/September/class_text_list_3_neg.pt')
-    labels = torch.load('/netscratch/abu/classifier_data/September/label_3_neg.pt')
+    document_text = torch.load('data/classifier/documents_text.pt')
+    class_kges = torch.load('data/classifier/class_kges.pt')
+    class_text = torch.load('data/classifier/class_texts.pt')
+    labels = torch.load('data/classifier/labels.pt')
     labels = [float(label) for label in labels]
 
     # Define DataCollocator
