@@ -47,7 +47,7 @@ def get_taxonomy_embeddings(dbpedia_embeddings: pd.DataFrame, linked_taxonomy: d
         # iterate over all DBpedia entities linked to the ORKG label, add their embeddings to the list multiplied by their weight
         # update the weight sum
         for entity, weight in linked_entities.items():
-            taxonomy_embeddings.append(weight*(dbpedia_embeddings[dbpedia_embeddings['FoR']==entity]['embeddings'].values[0]))
+            for_entities_embeddings.append(weight*(dbpedia_embeddings[dbpedia_embeddings['FoR']==entity]['embedding'].values[0]))
             weights_sum = weights_sum + weight
     
         # sum all the embeddings that are connected to the same ORKG for_label (this already includes the multiplication with their weight)
