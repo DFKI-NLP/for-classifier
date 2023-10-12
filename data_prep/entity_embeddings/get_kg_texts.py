@@ -3,8 +3,34 @@ from transformers import AutoTokenizer
 import pandas as pd
 import torch
 
-from data_prep.utils import get_academicDisciplines
+import sparql_dataframe
 
+
+def get_academicDisciplines():
+
+    endpoint = "http://dbpedia.org/sparql"
+
+    query = """
+        PREFIX :     <http://dbpedia.org/resource/>
+        PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX dbo:  <http://dbpedia.org/ontology/>
+
+        SELECT DISTINCT ?discipline ?label ?abstract
+
+        WHERE {
+        ?subject dbo:academicDiscipline ?discipline .
+        ?discipline rdfs:label ?label ;
+                        dbo:abstract ?abstract .
+        FILTER (LANG(?label)="en") .
+        FILTER (LANG(?abstract)="en") .
+        }
+    """
+
+    # use sparql_dataframe; a library that return results of SPARQL queries as pandas DataFrames
+    academicDisciplines = sparql_dataframe.get(endpoint, query)
+
+    return academicDisciplines
 
 def get_label_texts(dbpedia_disciplines: pd.DataFrame, for_linking: dict, tokenizer: AutoTokenizer) -> dict:
     """
@@ -29,19 +55,21 @@ def get_label_texts(dbpedia_disciplines: pd.DataFrame, for_linking: dict, tokeni
     for for_label, linked_entities in for_linking.items():
         for_textual_info = []
     
-    for_textual_info.append(for_label)
-    
-    for entity, weight in linked_entities.items():
-        entity_label = dbpedia_disciplines[dbpedia_disciplines['discipline']==entity]['label'].values[0]
-        for_textual_info.append(entity_label)
+        for_textual_info.append(for_label)
         
-        entity_abstract = dbpedia_disciplines[dbpedia_disciplines['discipline']==entity]['abstract'].values[0]
-        for_textual_info.append(entity_abstract)
+        for entity, weight in linked_entities.items():
+            entity_label = dbpedia_disciplines[dbpedia_disciplines['discipline']==entity]['label'].values[0]
+            for_textual_info.append(entity_label)
+            
+            entity_abstract = dbpedia_disciplines[dbpedia_disciplines['discipline']==entity]['abstract'].values[0]
+            for_textual_info.append(entity_abstract)
+            
+            text_for_tokenizer = [text + tokenizer.sep_token for text in for_textual_info]
+            text_for_tokenizer = ''.join(text_for_tokenizer)[:-5]
         
-        text_for_tokenizer = [text + tokenizer.sep_token for text in for_textual_info]
-        text_for_tokenizer = ''.join(text_for_tokenizer)[:-5]
+        for_texts[for_label] = text_for_tokenizer
     
-    for_texts[for_label] = text_for_tokenizer
+    return for_texts
 
 def main():
     
@@ -49,7 +77,7 @@ def main():
 
     academicDisciplines = get_academicDisciplines()
 
-    for_linking = torch.load('../../data/taxonomy_embeddings.pt')
+    for_linking = torch.load('../../data/linked_taxonomy.pt')
 
     print("Getting textual features of taxonomy labels...")
     for_texts = get_label_texts(academicDisciplines, for_linking, tokenizer)

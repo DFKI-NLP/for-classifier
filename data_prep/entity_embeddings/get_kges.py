@@ -47,7 +47,7 @@ def get_taxonomy_embeddings(dbpedia_embeddings: pd.DataFrame, linked_taxonomy: d
         # iterate over all DBpedia entities linked to the ORKG label, add their embeddings to the list multiplied by their weight
         # update the weight sum
         for entity, weight in linked_entities.items():
-            for_entities_embeddings.append(weight*(dbpedia_embeddings[dbpedia_embeddings['FoR']==entity]['embedding'].values[0]))
+            for_entities_embeddings.append(weight*(dbpedia_embeddings[dbpedia_embeddings['entity']==entity]['embedding'].values[0]))
             weights_sum = weights_sum + weight
     
         # sum all the embeddings that are connected to the same ORKG for_label (this already includes the multiplication with their weight)
@@ -84,10 +84,12 @@ def main():
     )
 
     dbpedia_embeddings = pd.DataFrame(list(zip(entities, embeddings_pyrdf2vec)),
-              columns=['FoR','embedding'])
+              columns=['entity','embedding'])
 
     taxonomy_embeddings = get_taxonomy_embeddings(dbpedia_embeddings, linked_taxonomy)
     print('Sucessfully embedded taxonomy labels!')
+    print(type(taxonomy_embeddings))
+    print(taxonomy_embeddings)
 
     torch.save(taxonomy_embeddings, '../../data/taxonomy_embeddings.pt')
     print('Saved in "/data/taxonomy_embeddings.pt"')

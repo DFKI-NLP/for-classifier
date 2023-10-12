@@ -23,18 +23,31 @@ class EntityLinkingAPIs:
     3. FALCON API (https://labs.tib.eu/falcon/falcon2/api-use)
     """
 
-    def __init__(self, academicDisciplines, labels):
+    def __init__(self, academicDisciplines: pd.DataFrame, 
+                 all_labels: list, 
+                 orkg_labels: list, 
+                 complex_labels_dict: dict):
+        """
+        input:
+        academicDisciplines: a pd.DataFrame of all objects in DBpedia that have the predicate dbo:academicDiscipline
+        all_labels: a list of all taxonomy labels after cleaning (i.e. dividing to complex, non-complex, and preprocessing)
+        orkg_labels: a list of all original taxonomy labels from the ORKG (i.e. not cleaned)
+        complext_labels_dict: a dictionary of all the complex labels in the taxonomy with a list describing all of its simplified labels
+                                e.g. {'Arts and Humanities': ['Arts', 'Humanities']}
+        """
 
         self.academicDisciplines = academicDisciplines
-        self.labels = labels
+        self.all_labels = all_labels
+        self.orkg_labels = orkg_labels
+        self.complex_labels_dict = complex_labels_dict
 
     def run(self) -> dict:
 
-        wat_results = self._get_wat_results(self.labels)
+        wat_results = self._get_wat_results(self.all_labels)
         print('Got data from WAT API...')
-        lookup_results = self._get_lookup_results(self.labels)
+        lookup_results = self._get_lookup_results(self.all_labels)
         print('Got data from DBpedia Lookup...')
-        falcon_results = self._get_falcon_results(self.labels)
+        falcon_results = self._get_falcon_results(self.all_labels)
         print('Got data from FALCON API...')
 
         # link entities that exist as 1:1 matches in academicDisciplines
@@ -178,7 +191,7 @@ class EntityLinkingAPIs:
         """
     
         # this will be the returned dictionary which contains all linked identical entities
-        linked_entities = {el: [] for el in self.labels}
+        linked_entities = {el: [] for el in self.all_labels}
     
         # get identical entities from WAT API
         for key, value in wat_results.items():
@@ -263,13 +276,13 @@ class EntityLinkingAPIs:
                                                         linked-dbpedia-resource2: weight2, etc.} }
                                                           """
         
-        linked_entities_orkg = {el: [] for el in self.labels}
+        linked_entities_orkg = {el: [] for el in self.orkg_labels}
         
         for key, value in linked_entities_orkg.items():
             if key in linked_entities.keys():
                 linked_entities_orkg[key].append(linked_entities[key])
             else:
-                for label in complex_labels_dict[key]:
+                for label in self.complex_labels_dict[key]:
                     linked_entities_orkg[key].append(linked_entities[label])
 
         # merge dictionaries if one class has more than one
