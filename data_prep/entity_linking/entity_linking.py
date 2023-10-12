@@ -11,11 +11,36 @@ from collections import Counter
 import requests as req
 from bs4 import BeautifulSoup
 from thefuzz import fuzz
-
 from linking_APIs import EntityLinkingAPIs 
-from data_prep.utils import get_academicDisciplines
 import torch
 
+import sparql_dataframe
+
+def get_academicDisciplines():
+
+    endpoint = "http://dbpedia.org/sparql"
+
+    query = """
+        PREFIX :     <http://dbpedia.org/resource/>
+        PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX dbo:  <http://dbpedia.org/ontology/>
+
+        SELECT DISTINCT ?discipline ?label ?abstract
+
+        WHERE {
+        ?subject dbo:academicDiscipline ?discipline .
+        ?discipline rdfs:label ?label ;
+                        dbo:abstract ?abstract .
+        FILTER (LANG(?label)="en") .
+        FILTER (LANG(?abstract)="en") .
+        }
+    """
+
+    # use sparql_dataframe; a library that return results of SPARQL queries as pandas DataFrames
+    academicDisciplines = sparql_dataframe.get(endpoint, query)
+
+    return academicDisciplines
 
 def divide_labels(for_list):
 
@@ -70,7 +95,6 @@ def get_labels_list(complex_label_doc): # input is the label after it gets proce
                 
     return labels
 
-
 def simplify_complex_labels(complex_labels):
 
 	nlp = spacy.load("en_core_web_lg") # lg gives better results than sm or md
@@ -85,12 +109,40 @@ def simplify_complex_labels(complex_labels):
 
 	return complex_labels_dict
 
+def get_for_values(data:pd.DataFrame) -> list:
+     """
+     A function that takes the FoRC dataset as input and returns a flat list of its label values.
+     Additionally, the function cleans values with chars such as "/" and "&" so that they can be appropriately linked. 
+     """ 
+     
+     # Change the label 'Other Quantitative Biology' to its parent because of its ambiguity
+     for idx, row in data.iterrows():
+        if row['label'] == 'Other Quantitative Biology':
+             data.at[idx, 'label'] = 'Biology, Integrated Biology, Integrated Biomedical Sciences'
+     
+     # list of FoR
+     for_flat_list = list(set(data['label'].values))
+     for_cleaned_list = []
+
+     for label in for_flat_list:
+        cleaned_label = label
+        if '/' in label:
+             cleaned_label = cleaned_label.replace("/", ", ")
+        if '&' in label:
+             cleaned_label = cleaned_label.replace("&", "and")
+        
+        for_cleaned_list.append(cleaned_label)
+
+     return for_cleaned_list
+
+
+
 def main():
 
-    data = pd.read_csv('~/documents/for-classifier/data/forc_I_dataset_FINAL_September.csv')
+    data = pd.read_csv('~/documents/forc_I_dataset_FINAL_September.csv')
 
     # list of FoR
-    for_flat_list = list(set(data['label'].values))
+    for_flat_list = get_for_values(data)
 
     complex_labels, non_complex_labels = divide_labels(for_flat_list)
     print("Divided taxonomy labels...")
@@ -112,7 +164,7 @@ def main():
     academicDisciplines = get_academicDisciplines()
     print("Got list of dbo:academicDisciplines...")
 
-    entity_linker = EntityLinkingAPIs(academicDisciplines, all_labels)
+    entity_linker = EntityLinkingAPIs(academicDisciplines, all_labels, for_flat_list, complex_labels_dict)
 
     linked_taxonomy = entity_linker.run()
     print('Sucessfully linked taxonomy!')
