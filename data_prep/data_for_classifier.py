@@ -4,6 +4,7 @@ import random
 import torch
 
 from sklearn.preprocessing import LabelEncoder
+from transformers import AutoTokenizer
 
 random.seed(42)
 
@@ -42,7 +43,9 @@ def get_binary_dataset(dataset, negative_samples = 3):
 
 def clean_data(data: pd.DataFrame):
 
-    
+    texts_rows = []
+    tokenizer = AutoTokenizer.from_pretrained('malteos/scincl')
+
     for idx, row in data.iterrows():
         # Substitute 'Other Quantitative Biology' with its parent node due to ambiguity
         if row['label'] == 'Other Quantitative Biology':
@@ -55,6 +58,16 @@ def clean_data(data: pd.DataFrame):
             cleaned_label = row['label'].replace("&", "and")
             data.at[idx, 'label'] = cleaned_label
 
+        # Append title[SEP]abstract to add it in a new column
+        if type(row['abstract']) == str:
+            text = row['title'] + tokenizer.sep_token + row['abstract']
+        else:
+            text = row['title']
+        
+        texts_rows.append(text)
+
+    data['document_text'] = texts_rows
+         
     return data
 
 def get_categorical_labels(data):
@@ -119,26 +132,32 @@ def main():
 
     data = pd.read_csv('~/documents/forc_I_dataset_FINAL_September.csv')
     cleaned_data = clean_data(data)
+    print("Cleaned data...")
     
     # get binary data that consists of ((row_number, category_number), binary_label)
     binary_data, labels_mapping = get_binary_dataset(cleaned_data)
     # shuffle data
     random.shuffle(binary_data)
-    torch.save(binary_data, '../../data/classifier/binary_data.pt')
+    torch.save(binary_data, '../data/classifier/binary_data.pt')
+    print("Constructed binary dataset...")
 
-    taxonomy_texts = torch.load('../../data/taxonomy_texts.pt')
-    taxonomy_embeddings = torch.load('../../data/taxonomy_embeddings.pt')
+    taxonomy_texts = torch.load('../data/taxonomy_texts.pt')
+    taxonomy_embeddings = torch.load('../data/taxonomy_embeddings.pt')
 
     document_text_list, class_text_list, class_kge_list, label_list = get_classifier_data(binary_data, 
                                                                                           cleaned_data, 
                                                                                           taxonomy_texts,
                                                                                           taxonomy_embeddings,
                                                                                           labels_mapping)
+    
+    print("Constructed input for classifier successfully!")
 
-    torch.save(document_text_list, '../../data/classifier/documents_text.pt')
-    torch.save(class_kge_list, '../../data/classifier/class_kges.pt')
-    torch.save(class_text_list, '../../data/classifier/class_texts.pt')
-    torch.save(label_list, '../../data/classifier/labels.pt')
+    torch.save(document_text_list, '../data/classifier/documents_text.pt')
+    torch.save(class_kge_list, '../data/classifier/class_kges.pt')
+    torch.save(class_text_list, '../data/classifier/class_texts.pt')
+    torch.save(label_list, '../data/classifier/labels.pt')
+
+    print("Saved data under ../data/classifier/")
 
 if __name__ == '__main__':
     main()
