@@ -1,29 +1,31 @@
 # for-classifier
 
-To link the taxonomy to DBpedia entities:
+## To create the classification dataset from the FoRC pre-prepared dataset: 
+
+1. Link the taxonomy to DBpedia entities:
 
 ```commandline
 python data_prep/entity_linking/entity_linking.py
 ```
 
-To create KGEs of taxonomy labels:
+2. Create KGEs of taxonomy labels:
 
 ```commandline
 python data_prep/entity_embeddings/get_kges.py
 ```
 
-To create textual representations of taxonomy labels:
+3. Create textual representations of taxonomy labels:
 
 ```commandline
 python data_prep/entity_embeddings/get_kg_texts.py
 ```
 
-To create dataset for classifier:
+4. Create binary dataset for classifier:
 
 ```commandline
 ```
 
-To run classifier:
+## To run classifier:
 
 ```commandline
 ```
