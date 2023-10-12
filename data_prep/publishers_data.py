@@ -40,6 +40,60 @@ def get_publisher_dict(data: pd.DataFrame) -> list:
 
     return publisher_dict
 
+def get_publisher_embeddings(data: pd.DataFrame, 
+                          author_dict: dict, 
+                          tokenizer: AutoTokenizer, 
+                          model: AutoModel) -> dict:
+
+    default_list = []
+    publisher_embedding_dict = {key: default_list[:] for key in set(author_dict)}
+
+    for publisher, indices in author_dict.items():
+        indices_embeddings = []
+        for index in indices:
+            title = data['title'][index]
+            abstact = None
+            if type(data['abstract'][index]) == str:
+                abstract = data['abstract'][index]
+            title_abs = title + tokenizer.sep_token + abstract
+            inputs = tokenizer(title_abs, padding=True, truncation=True, return_tensors="pt", max_length=512)
+            result = model(**inputs)
+            embedding = result.last_hidden_state[:, 0, :]
+            indices_embeddings.append(embedding)
+
+        # the embedding representing each author is the average embedding of all the publications they wrote
+        publisher_embedding_dict[publisher] = sum(indices_embeddings)/len(indices_embeddings)
+
+    return publisher_embedding_dict
+
+def get_data_with_publisher_embedding(data: pd.DataFrame, 
+                                    publisher_embedding_dict: dict) -> pd.DataFrame:
+
+    publisher_author_embeddings = []
+
+    for idx, row in data.iterrows():
+        row_publisher = row['clean_publisher']
+        row_publisher_embedding = []
+        for author, embedding in publisher_embedding_dict.items():
+            if author in row_publisher:
+                row_publisher_embedding.append(embedding)
+        # the author embedding of each row is the average of all of its authors' embeddings
+        publisher_author_embeddings.append(sum(row_publisher_embedding)/len(row_publisher_embedding))
+
+    data['publishers_embedding'] = publisher_author_embeddings
+
+    return data
+
+def get_embeddings_for_binary_classifier(data, binary_data):
+
+    publisher_embeddings_for_binary_classifier = []
+
+    for data_point in binary_data:
+        row_idx = data_point[0][0]
+        publisher_embeddings_for_binary_classifier.append(data['publishers_embedding'][row_idx])
+    
+    return publisher_embeddings_for_binary_classifier
+
 
 def main():
 
@@ -55,18 +109,18 @@ def main():
     model = AutoModel.from_pretrained('malteos/scincl')
 
     # A dictionary of {unique_publisher: their embedding (the average of the title+abstract embedding of all their papers)}
-    author_embedding_dict = get_author_embeddings(author_dict, tokenizer, model)
+    publisher_embedding_dict = get_publisher_embeddings(data, publisher_dict, tokenizer, model)
 
     # updated data with author embeddings for each row
-    data = get_data_with_authors_embedding(data, author_embedding_dict)
+    data = get_data_with_publisher_embedding(data, publisher_embedding_dict)
 
     # get binary data (prepared in data_for_classifier.py)
     binary_data = torch.load('../../data/classifier/binary_data.pt')
 
     # list of author embeddings according to binary dataset, to be used as input for the binary classifier
-    author_embeddings_for_binary_classifier = get_embeddings_for_binary_classifier(data, binary_data)
+    publisher_embeddings_for_binary_classifier = get_embeddings_for_binary_classifier(data, binary_data)
 
-    torch.save(author_embeddings_for_binary_classifier, '../../data/classifier/authors_embeddings.pt')     
+    torch.save(publisher_embeddings_for_binary_classifier, '../../data/classifier/publisher_embeddings.pt')     
 
 if __name__ == '__main__':
     main()
