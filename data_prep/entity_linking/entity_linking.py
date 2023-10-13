@@ -149,7 +149,6 @@ def main():
 
     complex_labels_dict = simplify_complex_labels(complex_labels)
     print("Simplified complex labels...")
-    print(complex_labels_dict)
 
     simplified_labels = complex_labels_dict.values()
 
@@ -169,8 +168,9 @@ def main():
 
     linked_taxonomy = entity_linker.run()
     print('Sucessfully linked taxonomy!')
+    print(linked_taxonomy)
 
-    torch.save(linked_taxonomy, '../../data/linked_taxonomy.pt')
+    torch.save(linked_taxonomy, '../../../data/linked_taxonomy.pt')
     print('Saved in "/data/linked_taxonomy.pt"')
 
 

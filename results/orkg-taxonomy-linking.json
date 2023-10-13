@@ -1,0 +1,575 @@
+{
+	"Motor Control": {
+		"http://dbpedia.org/resource/Motor_control": 1	
+		}, 
+
+	"Statistical Methodology": {
+		"http://dbpedia.org/resource/Methodology": 1, 
+		"http://dbpedia.org/resource/Statistics": 1
+		}, 
+
+	"Cosmology": {
+		"http://dbpedia.org/resource/Cosmology": 1
+		}, 
+
+	"Hardware Systems": {
+		"http://dbpedia.org/resource/Hardware_security": 1
+		}, 
+
+	"Databases, Information Systems": {
+		"http://dbpedia.org/resource/Information_system": 1, 
+		"http://dbpedia.org/resource/Database": 1
+		}, 
+
+	"Analysis": {
+		"http://dbpedia.org/resource/Analysis": 1
+		},
+
+	"Quantitative Finance": {
+		"http://dbpedia.org/resource/Mathematical_finance": 1
+		},
+
+	"Bioinformatics": {
+		"http://dbpedia.org/resource/Bioinformatics": 1
+		},
+
+	"Number Theory": {
+		"http://dbpedia.org/resource/Number_theory": 1
+		}, 
+
+	"Logic and Foundations": {
+		"http://dbpedia.org/resource/Logic": 1, 
+		"http://dbpedia.org/resource/Detonation": 1
+		},
+
+	"Atmospheric Sciences": {
+		"http://dbpedia.org/resource/Atmospheric_science": 1
+		}, 
+
+	"Theory, Algorithms": {
+		"http://dbpedia.org/resource/Theory": 1, 
+		"http://dbpedia.org/resource/Algorithm": 1
+		},
+
+	"Geophysics and Seismology": {
+		"http://dbpedia.org/resource/Geophysics": 1, 
+		"http://dbpedia.org/resource/Seismology": 1
+		}, 
+
+	"Civil and Environmental Engineering": {
+		"http://dbpedia.org/resource/Civil_engineering": 1, 
+		"http://dbpedia.org/resource/Environmental_engineering": 1
+		}, 
+
+	"Fluid Dynamics": {
+		"http://dbpedia.org/resource/Fluid_dynamics": 1
+		}, 
+
+	"Cosmology, Relativity, and Gravity": {
+		"http://dbpedia.org/resource/Cosmology": 1, 
+		"http://dbpedia.org/resource/General_relativity": 1, 
+		"http://dbpedia.org/resource/Theory_of_relativity": 2, 
+		"http://dbpedia.org/resource/Special_relativity": 1, 
+		"http://dbpedia.org/resource/Gravity": 1
+		}, 
+
+	"Ecology and Evolutionary Biology": {
+		"http://dbpedia.org/resource/Evolutionary_biology": 1, 
+		"http://dbpedia.org/resource/Ecology": 1
+		},
+
+	"Instrumentation": {
+		"http://dbpedia.org/resource/Instrumentation": 1
+		},
+
+	"Molecular, cellular, and tissue engineering": {
+		"http://dbpedia.org/resource/Molecular_engineering": 1,
+		"http://dbpedia.org/resource/Tissue_engineering": 1,
+		"http://dbpedia.org/resource/Biological_engineering": 1
+		}, 
+
+	"Molecular Biology": {
+		"http://dbpedia.org/resource/Molecular_biology": 1
+		},
+
+	"Toxicology": {
+		"http://dbpedia.org/resource/Toxicology": 1
+		}, 
+
+	"Geometry and Topology": {
+		"http://dbpedia.org/resource/Geometry": 1,
+		"http://dbpedia.org/resource/Topology": 1
+		},
+
+	"Econometrics": {
+		"http://dbpedia.org/resource/Econometrics": 1
+		}, 
+
+	"Category Theory": {
+		"http://dbpedia.org/resource/Category_theory": 1
+		},
+
+	"Biology, Integrated Biology, Integrated Biomedical Sciences": {
+		"http://dbpedia.org/resource/Integrated_circuit": 2, 
+		"http://dbpedia.org/resource/Biology": 2, 
+		"http://dbpedia.org/resource/Biomedical_sciences": 1
+		},
+
+	"Physical Processes": {
+		"http://dbpedia.org/resource/Physical_optics": 1
+		},
+
+	"Oceanography": {
+		"http://dbpedia.org/resource/Oceanography": 1
+		}, 
+
+	"Public Affairs, Public Policy and Public Administration": {
+		"http://dbpedia.org/resource/Public_law": 1,
+		"http://dbpedia.org/resource/Public_policy": 1,
+		"http://dbpedia.org/resource/Public_administration": 1
+		},
+
+	"Algebraic Geometry": {
+		"http://dbpedia.org/resource/Algebraic_geometry": 1
+		},
+
+	"Robotics": {
+		"http://dbpedia.org/resource/Robotics": 1
+		},
+
+	"Genomics": {
+		"http://dbpedia.org/resource/Genomics": 1
+		},
+
+	"Communication Technology and New Media": {
+		"http://dbpedia.org/resource/Information_and_communications_technology": 1,
+		"http://dbpedia.org/resource/Communication_studies": 1,
+		"http://dbpedia.org/resource/Communication": 1,
+		"http://dbpedia.org/resource/Mediation": 1
+		},
+
+	"Economics": {
+		"http://dbpedia.org/resource/Economics": 1
+		},
+
+	"Computational Linguistics": {
+		"http://dbpedia.org/resource/Computational_linguistics": 1
+		},
+
+	"Computational Geometry": {
+		"http://dbpedia.org/resource/Computational_geometry": 1
+		},
+
+	"Human Computer Interfaces": {
+		"http://dbpedia.org/resource/Human–computer_interaction": 2
+		},
+
+	"Sociology": {
+		"http://dbpedia.org/resource/Sociology": 1
+		},
+
+	"Mathematical Software": {
+		"http://dbpedia.org/resource/Mathematical_software": 1
+		},
+
+	"Materials Science and Engineering": {
+		"http://dbpedia.org/resource/Materials_science": 1,
+		"http://dbpedia.org/resource/Engineering": 1
+		},
+
+	"Earth Sciences": {
+		"http://dbpedia.org/resource/Earth_science": 1
+		},
+
+	"Computer Sciences": {
+		"http://dbpedia.org/resource/Computer_science": 1
+		},
+
+	"Information Science": {
+		"http://dbpedia.org/resource/Information_science": 1
+		},
+
+	"Cryptography and Security": {
+		"http://dbpedia.org/resource/Cryptography": 1,
+		"http://dbpedia.org/resource/Security": 1
+		},
+
+	"Computers and Society": {
+		"http://dbpedia.org/resource/Computer": 1,
+		"http://dbpedia.org/resource/Security": 1
+		},
+
+	"External Galaxies": {
+		"http://dbpedia.org/resource/External_ballistics": 1
+		}, 
+
+	"Popular Physics": {
+		"http://dbpedia.org/resource/Physics": 2,
+		"http://dbpedia.org/resource/Symmetry_(physics)": 1,
+		"http://dbpedia.org/resource/Modern_physics": 1
+		},
+
+	"Public Health": {
+		"http://dbpedia.org/resource/Public_health": 1
+		},
+
+	"Signal Processing": {
+		"http://dbpedia.org/resource/Signal_processing": 1
+		},
+
+	"Numerical Analysis and Computation": {
+		"http://dbpedia.org/resource/Numerical_analysis": 1,
+		"http://dbpedia.org/resource/Computation": 1
+		},
+
+	"Physics": {
+		"http://dbpedia.org/resource/Physics": 1
+		},
+
+	"Information Systems, Process and Knowledge Management": {
+		"http://dbpedia.org/resource/Information_system": 1, 
+		"http://dbpedia.org/resource/Stress_management": 1, 
+		"http://dbpedia.org/resource/Knowledge_management": 1
+		},
+
+	"The Sun and the Solar System": {
+		"http://dbpedia.org/resource/Solar_System": 1, 
+		"http://dbpedia.org/resource/Sun": 1
+		},
+
+	"Mechanical Engineering": {
+		"http://dbpedia.org/resource/Mechanical_engineering": 1
+		},
+
+	"Electrical and Computer Engineering": {
+		"http://dbpedia.org/resource/Electrical_engineering": 1,
+		"http://dbpedia.org/resource/Computer_engineering": 1
+		},
+
+	"Medicine": {
+		"http://dbpedia.org/resource/Medicine": 1
+		},
+
+	"Energy Systems": {
+		"http://dbpedia.org/resource/Energy": 1
+		},
+
+	"Linguistics": {
+		"http://dbpedia.org/resource/Linguistics": 1
+		},
+
+	"Data Analysis, Statistics and Probability": {
+		"http://dbpedia.org/resource/Data_analysis": 1, 
+		"http://dbpedia.org/resource/Statistics": 1, 
+		"http://dbpedia.org/resource/Probability": 1
+		},
+
+	"Engineering": {
+		"http://dbpedia.org/resource/Engineering": 1
+		},
+
+	"Population Biology": {
+		"http://dbpedia.org/resource/Population_biology": 1
+		},
+
+	"Chemistry": {
+		"http://dbpedia.org/resource/Chemistry": 1
+		},
+
+	"Programming Languages, Compilers": {
+		"http://dbpedia.org/resource/Programming_language": 1,
+		"http://dbpedia.org/resource/Compiler": 1
+		},
+
+	"Statistics and Probability": {
+		"http://dbpedia.org/resource/Statistics": 1,
+		"http://dbpedia.org/resource/Probability": 1
+		},
+
+	"Complex Variables": {
+		"http://dbpedia.org/resource/Complex_analysis": 1
+		},
+
+	"Set Theory": {
+		"http://dbpedia.org/resource/Set_theory": 1
+		},
+
+	"Space Physics": {
+		"http://dbpedia.org/resource/Space_physics": 1
+		},
+
+	"Quantitative Methods": {
+		"http://dbpedia.org/resource/Quantitative_research": 1,
+		"http://dbpedia.org/resource/Quantitative_revolution": 1
+		},
+
+	"Digital Libraries": {
+		"http://dbpedia.org/resource/Digital_library": 1
+		},
+
+	"Neuroscience and Neurobiology": {
+		"http://dbpedia.org/resource/Neuroscience": 2
+		}, 
+
+	"Mathematics History and Overview": {
+		"http://dbpedia.org/resource/Mathematics": 2,
+		"http://dbpedia.org/resource/History_of_mathematics": 1, 
+		"http://dbpedia.org/resource/Civil_service": 1
+		},
+
+	"Oceanography and Atmospheric Sciences and Meteorology": {
+		"http://dbpedia.org/resource/Atmospheric_science": 1,
+		"http://dbpedia.org/resource/Oceanography": 1,
+		"http://dbpedia.org/resource/Meteorology": 1
+		},
+
+	"Algebra": {
+		"http://dbpedia.org/resource/Algebra": 1
+		},
+
+	"Nonlinear Sciences": {
+		"http://dbpedia.org/resource/Nonlinear_system": 2,
+		"http://dbpedia.org/resource/Nonlinear_programming": 1
+		},
+
+	"Economic Theory": {
+		"http://dbpedia.org/resource/Economics": 1
+		},
+
+	"Physical Sciences and Mathematics": {
+		"http://dbpedia.org/resource/Physics": 1,
+		"http://dbpedia.org/resource/Outline_of_physical_science": 1,
+		"http://dbpedia.org/resource/Mathematics": 1
+		},
+
+	"Mathematics": {
+		"http://dbpedia.org/resource/Mathematics": 1
+		},
+
+	"Software Engineering": {
+		"http://dbpedia.org/resource/Software_engineering": 1
+		},
+
+	"Operations Research, Systems Engineering and Industrial Engineering": {
+		"http://dbpedia.org/resource/Operations_research": 1,
+		"http://dbpedia.org/resource/Systems_engineering": 1,
+		"http://dbpedia.org/resource/Industrial_engineering": 1
+		},
+
+	"Multiagent Systems": {
+		"http://dbpedia.org/resource/Multi-agent_system": 1
+		},
+
+	"Applied Statistics": {
+		"http://dbpedia.org/resource/Statistics": 2
+		},
+
+	"Optics": {
+		"http://dbpedia.org/resource/Optics": 1
+		},
+
+	"Plasma and Beam Physics": {
+		"http://dbpedia.org/resource/Plasma_(physics)": 1,
+		"http://dbpedia.org/resource/Physics": 1,
+		"http://dbpedia.org/resource/Laser": 1,
+		"http://dbpedia.org/resource/Modern_physics": 1
+		},
+
+	"History and Philosophy of Physics": {
+		"http://dbpedia.org/resource/History": 1,
+		"http://dbpedia.org/resource/Philosophy": 1,
+		"http://dbpedia.org/resource/Physics": 1
+		},
+
+	"Machine Learning": {
+		"http://dbpedia.org/resource/Machine_learning": 1
+		},
+
+	"Animal Sciences": {
+		"http://dbpedia.org/resource/Animal_science": 1
+		},
+
+	"Environmental Sciences": {
+		"http://dbpedia.org/resource/Environmental_science": 1
+		},
+
+	"Atomic, Molecular and Optical Physics": {
+		"http://dbpedia.org/resource/Atomic_physics": 1, 
+		"http://dbpedia.org/resource/Molecular_physics": 1, 
+		"http://dbpedia.org/resource/Optician": 1
+		},
+
+	"Life Sciences": {
+		"http://dbpedia.org/resource/Biology": 1
+		},
+
+	"Nanoscience and Nanotechnology": {
+		"http://dbpedia.org/resource/Nanotechnology": 3, 
+		"http://dbpedia.org/resource/Quantum_nanoscience": 1
+		},
+
+	"Physics and Society": {
+		"http://dbpedia.org/resource/Physics": 1,
+		"http://dbpedia.org/resource/Security": 1
+		},
+
+	"Astrophysics and Astronomy": {
+		"http://dbpedia.org/resource/Astrophysics": 1,
+		"http://dbpedia.org/resource/Astronomy": 1
+		},
+
+	"Computer Vision and Pattern Recognition": {
+		"http://dbpedia.org/resource/Computer_vision": 2,
+		"http://dbpedia.org/resource/Visual_perception": 1,
+		"http://dbpedia.org/resource/Pattern_recognition": 1
+		},
+
+	"Social and Behavioral Sciences": {
+		"http://dbpedia.org/resource/Behavioural_sciences": 1,
+		"http://dbpedia.org/resource/Social": 1,
+		"http://dbpedia.org/resource/Social_research": 1
+		},
+
+	"Mechanics of Materials": {
+		"http://dbpedia.org/resource/Mechanics": 1,
+		"http://dbpedia.org/resource/Materials_science": 1
+		},
+
+	"Graphics": {	
+		"http://dbpedia.org/resource/Graphics": 1
+		},
+
+	"Computer and Systems Architecture": {
+		"http://dbpedia.org/resource/Computer_architecture": 1, 
+		"http://dbpedia.org/resource/Architecture": 1
+		},
+
+	"Image and Video Processing": {
+		"http://dbpedia.org/resource/Image_compression": 1,
+		"http://dbpedia.org/resource/Video_processing": 1
+		},
+
+	"Computer Engineering": {
+		"http://dbpedia.org/resource/Computer_engineering": 1
+		},
+
+	"Microbiology": {
+		"http://dbpedia.org/resource/Microbiology": 1
+		},
+
+	"Biomedical Engineering and Bioengineering": {
+		"http://dbpedia.org/resource/Biomedical_engineering": 1, 
+		"http://dbpedia.org/resource/Biological_engineering": 1
+		},
+
+	"Physics Education": {
+		"http://dbpedia.org/resource/Physics_education": 1
+		},
+
+	"Audio and Speech Processing": {
+		"http://dbpedia.org/resource/Speech_processing": 1,
+		"http://dbpedia.org/resource/Acoustical_engineering": 1
+		},
+
+	"Biological and Chemical Physics": {
+		"http://dbpedia.org/resource/Biological_Physics": 1,
+		"http://dbpedia.org/resource/Chemical_physics": 1
+		},
+
+	"Arts and Humanities": {
+		"http://dbpedia.org/resource/The_arts": 1,
+		"http://dbpedia.org/resource/Humanities": 1
+		},
+
+	"Dynamics, Dynamical Systems": {
+		"http://dbpedia.org/resource/Dynamical_system": 1,
+		"http://dbpedia.org/resource/Vehicle_dynamics": 1,
+		"http://dbpedia.org/resource/Dynamics_(mechanics)": 1
+		},
+
+	"Security and Dependability": {
+		"http://dbpedia.org/resource/Security": 1, 
+		"http://dbpedia.org/resource/Dependability": 1
+		}, 
+
+	"Computational Physics": {
+		"http://dbpedia.org/resource/Computational_physics": 1
+		},
+
+	"Condensed Matter Physics": {
+		"http://dbpedia.org/resource/Condensed_matter_physics": 1
+		},
+
+	"Medical Physics": {
+		"http://dbpedia.org/resource/Medical_physics": 1
+		},
+
+	"Digital Communications and Networking": {
+		"http://dbpedia.org/resource/Communication_studies": 1,
+		"http://dbpedia.org/resource/Network_science": 1
+		},
+
+	"Controls and Control Theory": {
+		"http://dbpedia.org/resource/Control_theory": 1
+		},
+
+	"Cell Behavior": {
+		"http://dbpedia.org/resource/Human_behavior": 1,
+		"http://dbpedia.org/resource/Behavior": 2
+		},
+
+	"Computer Science and Game Theory": {
+		"http://dbpedia.org/resource/Computer_science": 1, 
+		"http://dbpedia.org/resource/Philosophy_of_science": 1, 
+		"http://dbpedia.org/resource/Science": 1, 
+		"http://dbpedia.org/resource/Theory": 1, 
+		"http://dbpedia.org/resource/Game_theory": 1
+		},
+
+	"OS, Networks": {
+		"http://dbpedia.org/resource/Operating_system": 1,
+		"http://dbpedia.org/resource/Computer_network": 1
+		},
+
+	"Tissues and Organs": {
+		"http://dbpedia.org/resource/Tissue_(biology)": 1,
+		"http://dbpedia.org/resource/Organology": 1
+		},
+
+	"Quantum Physics": {
+		"http://dbpedia.org/resource/Quantum_mechanics": 2
+		},
+
+	"Science and Technology Studies": {
+		"http://dbpedia.org/resource/Science_fiction_studies": 1,
+		"http://dbpedia.org/resource/Technology": 1
+		},
+
+	"Artificial Intelligence": {
+		"http://dbpedia.org/resource/Artificial_intelligence": 1
+		},
+
+	"Medicinal Chemistry and Pharmaceutics": {
+		"http://dbpedia.org/resource/Medicinal_chemistry": 1,
+		"http://dbpedia.org/resource/Pharmaceutics": 1
+		},
+
+	"Psychology": {
+		"http://dbpedia.org/resource/Psychology": 1
+		},
+
+	"Discrete Mathematics and Combinatorics": {
+		"http://dbpedia.org/resource/Discrete_mathematics": 1,
+		"http://dbpedia.org/resource/Combinatorics": 1
+		},
+
+	"Applied Mathematics": {
+		"http://dbpedia.org/resource/Mathematics": 1,
+		"http://dbpedia.org/resource/Structural_complexity_(applied_mathematics)": 1,
+		"http://dbpedia.org/resource/Applied_mathematics": 1
+		},
+
+	"Computational Engineering": {
+		"http://dbpedia.org/resource/Computational_engineering": 1
+		}
+}
