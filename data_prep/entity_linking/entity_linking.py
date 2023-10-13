@@ -149,6 +149,7 @@ def main():
 
     complex_labels_dict = simplify_complex_labels(complex_labels)
     print("Simplified complex labels...")
+    print(complex_labels_dict)
 
     simplified_labels = complex_labels_dict.values()
 

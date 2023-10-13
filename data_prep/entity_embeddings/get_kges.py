@@ -55,11 +55,8 @@ def get_taxonomy_embeddings(dbpedia_embeddings: pd.DataFrame, linked_taxonomy: d
     
         # save the weighted average in a dict
         taxonomy_embeddings[for_label] = for_entities_sum/weights_sum
-<<<<<<< HEAD
     
     return taxonomy_embeddings
-=======
->>>>>>> 93d0050a5ec695d1c391e43c628758f817bdea3b
 
 
 def main():
@@ -93,11 +90,6 @@ def main():
 
     taxonomy_embeddings = get_taxonomy_embeddings(dbpedia_embeddings, linked_taxonomy)
     print('Sucessfully embedded taxonomy labels!')
-<<<<<<< HEAD
-=======
-    print(type(taxonomy_embeddings))
-    print(taxonomy_embeddings)
->>>>>>> 93d0050a5ec695d1c391e43c628758f817bdea3b
 
     torch.save(taxonomy_embeddings, '../../data/taxonomy_embeddings.pt')
     print('Saved in "/data/taxonomy_embeddings.pt"')
