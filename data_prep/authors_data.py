@@ -120,13 +120,8 @@ def get_author_embeddings(data: pd.DataFrame,
         for index in indices:
             title = data['title'][index]
             abstact = None
-<<<<<<< HEAD
             if type(data['abstract'][index]) == str:
                 abstract = data['abstract'][index]
-=======
-            if type(data['abstrac'][index]) == str:
-                abstract = data['abstrac'][index]
->>>>>>> 93d0050a5ec695d1c391e43c628758f817bdea3b
             title_abs = title + tokenizer.sep_token + abstract
             inputs = tokenizer(title_abs, padding=True, truncation=True, return_tensors="pt", max_length=512)
             result = model(**inputs)
@@ -185,11 +180,7 @@ def main():
     model = AutoModel.from_pretrained('malteos/scincl')
 
     # A dictionary of {unique_author: their embedding (the average of the title+abstract embedding of all their papers)}
-<<<<<<< HEAD
     author_embedding_dict = get_author_embeddings(data, author_dict, tokenizer, model)
-=======
-    author_embedding_dict = get_author_embeddings(author_dict, tokenizer, model)
->>>>>>> 93d0050a5ec695d1c391e43c628758f817bdea3b
 
     # updated data with author embeddings for each row
     data = get_data_with_authors_embedding(data, author_embedding_dict)

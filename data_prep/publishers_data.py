@@ -40,7 +40,6 @@ def get_publisher_dict(data: pd.DataFrame) -> list:
 
     return publisher_dict
 
-<<<<<<< HEAD
 def get_publisher_embeddings(data: pd.DataFrame, 
                           author_dict: dict, 
                           tokenizer: AutoTokenizer, 
@@ -95,8 +94,6 @@ def get_embeddings_for_binary_classifier(data, binary_data):
     
     return publisher_embeddings_for_binary_classifier
 
-=======
->>>>>>> 93d0050a5ec695d1c391e43c628758f817bdea3b
 
 def main():
 
@@ -112,31 +109,20 @@ def main():
     model = AutoModel.from_pretrained('malteos/scincl')
 
     # A dictionary of {unique_publisher: their embedding (the average of the title+abstract embedding of all their papers)}
-<<<<<<< HEAD
+
     publisher_embedding_dict = get_publisher_embeddings(data, publisher_dict, tokenizer, model)
 
     # updated data with author embeddings for each row
     data = get_data_with_publisher_embedding(data, publisher_embedding_dict)
-=======
-    author_embedding_dict = get_author_embeddings(author_dict, tokenizer, model)
-
-    # updated data with author embeddings for each row
-    data = get_data_with_authors_embedding(data, author_embedding_dict)
->>>>>>> 93d0050a5ec695d1c391e43c628758f817bdea3b
 
     # get binary data (prepared in data_for_classifier.py)
     binary_data = torch.load('../../data/classifier/binary_data.pt')
 
     # list of author embeddings according to binary dataset, to be used as input for the binary classifier
-<<<<<<< HEAD
     publisher_embeddings_for_binary_classifier = get_embeddings_for_binary_classifier(data, binary_data)
 
     torch.save(publisher_embeddings_for_binary_classifier, '../../data/classifier/publisher_embeddings.pt')     
-=======
-    author_embeddings_for_binary_classifier = get_embeddings_for_binary_classifier(data, binary_data)
 
-    torch.save(author_embeddings_for_binary_classifier, '../../data/classifier/authors_embeddings.pt')     
->>>>>>> 93d0050a5ec695d1c391e43c628758f817bdea3b
 
 if __name__ == '__main__':
     main()
