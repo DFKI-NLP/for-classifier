@@ -1,269 +1,269 @@
 {	
 
-'Medicinal Chemistry and Pharmaceutics': [
-	'Medicinal Chemistry', 
-	'Pharmaceutics'
-], 
+"Medicinal Chemistry and Pharmaceutics": [
+	"Medicinal Chemistry", 
+	"Pharmaceutics"
+	], 
 
-'Data Analysis, Statistics and Probability': [
-	'Data Analysis', 
-	'Statistics', 
-	'Probability'
-], 
+"Data Analysis, Statistics and Probability": [
+	"Data Analysis", 
+	"Statistics", 
+	"Probability"
+	], 
 
-'Electrical and Computer Engineering': [
-'Electrical Engineering', 
-'Computer Engineering'
-],
+"Electrical and Computer Engineering": [
+	"Electrical Engineering", 
+	"Computer Engineering"
+	],
 
-'Atomic, Molecular and Optical Physics': [
-'Atomic Physics', 
-'Molecular Physics', 
-'Optical'
-],
+"Atomic, Molecular and Optical Physics": [
+	"Atomic Physics", 
+	"Molecular Physics", 
+	"Optical"
+	],
 
-'Computer and Systems Architecture': [
-'Computer Architecture', 
-'Systems Architecture'
-],
+"Computer and Systems Architecture": [
+	"Computer Architecture", 
+	"Systems Architecture"
+	],
 
-'Audio and Speech Processing': [
-'Speech Processing',
-'Audio'
-],
+"Audio and Speech Processing": [
+	"Speech Processing",
+	"Audio"
+	],
 
-'Science and Technology Studies': [
-'Science Studies',
-'Technology Studies'
-],
+"Science and Technology Studies": [
+	"Science Studies",
+	"Technology Studies"
+	],
 
-'Ecology and Evolutionary Biology': [
-'Evolutionary Biology',
-'Ecology'
-],
+"Ecology and Evolutionary Biology": [
+	"Evolutionary Biology",
+	"Ecology"
+	],
 
-'Arts and Humanities': [
-'Arts',
-'Humanities'
-], 
+"Arts and Humanities": [
+	"Arts",
+	"Humanities"
+	], 
 
-'Computer Vision and Pattern Recognition': [
-'Computer Vision', 
-'Vision Recognition',
-'Pattern Recognition'
-],
+"Computer Vision and Pattern Recognition": [
+	"Computer Vision", 
+	"Vision Recognition",
+	"Pattern Recognition"
+	],
 
-'Discrete Mathematics and Combinatorics': [
-'Discrete Mathematics', 
-'Combinatorics'
-],
+"Discrete Mathematics and Combinatorics": [
+	"Discrete Mathematics", 
+	"Combinatorics"
+	],
 
-'History and Philosophy of Physics': [
-'History',
-'Philosophy',
-'Physics'
-],
+"History and Philosophy of Physics": [
+	"History",
+	"Philosophy",
+	"Physics"
+	],
 
-'Plasma and Beam Physics': [
-'Plasma Physics', 
-'Beam Physics'
-], 
+"Plasma and Beam Physics": [
+	"Plasma Physics", 
+	"Beam Physics"
+	], 
 
-'Numerical Analysis and Computation': [
-'Numerical Analysis', 
-'Computation'
-], 
+"Numerical Analysis and Computation": [
+	"Numerical Analysis", 
+	"Computation"
+	], 
 
-'Oceanography and Atmospheric Sciences and Meteorology': [
-'Atmospheric Sciences', 
-'Oceanography', 
-'Meteorology'
-], 
+"Oceanography and Atmospheric Sciences and Meteorology": [
+	"Atmospheric Sciences", 
+	"Oceanography", 
+	"Meteorology"
+	], 
 
-'Databases, Information Systems': [
-'Information Systems',
-'Databases'
-], 
+"Databases, Information Systems": [
+	"Information Systems",
+	"Databases"
+	], 
 
-'Astrophysics and Astronomy': [
-'Astrophysics', 
-'Astronomy'
-], 
+"Astrophysics and Astronomy": [
+	"Astrophysics", 
+	"Astronomy"
+	], 
 
-'Physics and Society': [
-'Physics', 
-'Society'
-], 
+"Physics and Society": [
+	"Physics", 
+	"Society"
+	], 
 
-'Programming Languages, Compilers': [
-'Programming Languages',
-'Compilers'
-], 
+"Programming Languages, Compilers": [
+	"Programming Languages",
+	"Compilers"
+	], 
 
-'Civil and Environmental Engineering': [
-'Civil Engineering', 
-'Environmental Engineering'
-], 
+"Civil and Environmental Engineering": [
+	"Civil Engineering", 
+	"Environmental Engineering"
+	], 
 
-'Computer Science and Game Theory': [
-'Computer Science', 
-'Science Theory', 
-'Game Theory'
-], 
+"Computer Science and Game Theory": [
+	"Computer Science", 
+	"Science Theory", 
+	"Game Theory"
+	], 
 
-'Social and Behavioral Sciences': [
-'Behavioral Sciences', 
-'Social'
-], 
+"Social and Behavioral Sciences": [
+	"Behavioral Sciences", 
+	"Social"
+	], 
 
-'Geophysics and Seismology': [
-'Geophysics', 
-'Seismology'
-], 
+"Geophysics and Seismology": [
+	"Geophysics", 
+	"Seismology"
+	], 
 
-'Biomedical Engineering and Bioengineering': [
-'Biomedical Engineering', 
-'Bioengineering'
-], 
+"Biomedical Engineering and Bioengineering": [
+	"Biomedical Engineering", 
+	"Bioengineering"
+	], 
 
-'Cryptography and Security': [
-'Cryptography', 
-'Security'
-],
+"Cryptography and Security": [
+	"Cryptography", 
+	"Security"
+	],
 
-'Nanoscience and Nanotechnology': [
-'Nanoscience',
-'Nanotechnology'
-],
+"Nanoscience and Nanotechnology": [
+	"Nanoscience",
+	"Nanotechnology"
+	],
 
-'Communication Technology and New Media': [
-'Communication Technology', 
-'New Media'
-],
+"Communication Technology and New Media": [
+	"Communication Technology", 
+	"New Media"
+	],
 
-'Mathematics History and Overview': [
-'Mathematics History', 
-'Overview'
-],
+"Mathematics History and Overview": [
+	"Mathematics History", 
+	"Overview"
+	],
 
-'Logic and Foundations': [
-'Logic',
-'Foundations'
-], 
+"Logic and Foundations": [
+	"Logic",
+	"Foundations"
+	], 
 
-'OS, Networks': [
-'OS',
-'Networks'
-], 
+"OS, Networks": [
+	"OS",
+	"Networks"
+	], 
 
-'Neuroscience and Neurobiology': [
-'Neuroscience', 
-'Neurobiology'
-], 
+"Neuroscience and Neurobiology": [
+	"Neuroscience", 
+	"Neurobiology"
+	], 
 
-'Cosmology, Relativity, and Gravity': [
-'Cosmology', 
-'Relativity', 
-'Gravity'
-], 
+"Cosmology, Relativity, and Gravity": [
+	"Cosmology", 
+	"Relativity", 
+	"Gravity"
+	], 
 
-'Biological and Chemical Physics': [
-'Biological Physics', 
-'Chemical Physics'
-],
+"Biological and Chemical Physics": [
+	"Biological Physics", 
+	"Chemical Physics"
+	],
 
-'Operations Research, Systems Engineering and Industrial Engineering': [
-'Operations Research', 
-'Systems Engineering',
-'Industrial Engineering'
-],
+"Operations Research, Systems Engineering and Industrial Engineering": [
+	"Operations Research", 
+	"Systems Engineering",
+	"Industrial Engineering"
+	],
 
-'Security and Dependability': [
-'Security',
-'Dependability'
-],
+"Security and Dependability": [
+	"Security",
+	"Dependability"
+	],
 
-'Public Affairs, Public Policy and Public Administration': [
-'Public Affairs',
-'Public Policy',
-'Public Administration'
-],
+"Public Affairs, Public Policy and Public Administration": [
+	"Public Affairs",
+	"Public Policy",
+	"Public Administration"
+	],
 
-'Materials Science and Engineering': [
-'Materials Science',
-'Engineering'
-],
+"Materials Science and Engineering": [
+	"Materials Science",
+	"Engineering"
+	],
 
-'Computers and Society': [
-'Computers',
-'Society'
-],
+"Computers and Society": [
+	"Computers",
+	"Society"
+	],
 
-'Geometry and Topology': [
-'Geometry',
-'Topology'
-],
+"Geometry and Topology": [
+	"Geometry",
+	"Topology"
+	],
 
-'Information Systems, Process and Knowledge Management': [
-'Information Systems',
-'Process Management',
-'Knowledge Management'
-],
+"Information Systems, Process and Knowledge Management": [
+	"Information Systems",
+	"Process Management",
+	"Knowledge Management"
+	],
 
-'The Sun and the Solar System': [
-'Solar System', 
-'Sun'
-],
+"The Sun and the Solar System": [
+	"Solar System", 
+	"Sun"
+	],
 
-'Molecular, cellular, and tissue engineering': [
-'Molecular engineering',
-'tissue engineering',
-'cellular engineering'
-],
+"Molecular, cellular, and tissue engineering": [
+	"Molecular engineering",
+	"tissue engineering",
+	"cellular engineering"
+	],
 
-'Biology, Integrated Biology, Integrated Biomedical Sciences': [
-'Integrated Biology',
-'Integrated Sciences',
-'Biomedical Sciences'
-],
+"Biology, Integrated Biology, Integrated Biomedical Sciences": [
+	"Integrated Biology",
+	"Integrated Sciences",
+	"Biomedical Sciences"
+	],
 
-'Digital Communications and Networking': [
-'Digital Communications',
-'Networking'
-],
+"Digital Communications and Networking": [
+	"Digital Communications",
+	"Networking"
+	],
 
-'Statistics and Probability': [
-'Statistics',
-'Probability'
-],
+"Statistics and Probability": [
+	"Statistics",
+	"Probability"
+	],
 
-'Controls and Control Theory': [
-'Controls Theory'
-],
+"Controls and Control Theory": [
+	"Controls Theory"
+	],
 
-'Physical Sciences and Mathematics': [
-'Physical Sciences',
-'Mathematics'
-],
+"Physical Sciences and Mathematics": [
+	"Physical Sciences",
+	"Mathematics"
+	],
 
-'Image and Video Processing': [
-'Image Processing', 
-'Video Processing'
-],
+"Image and Video Processing": [
+	"Image Processing", 
+	"Video Processing"
+	],
 
-'Dynamics, Dynamical Systems': [
-'Dynamical Systems', 
-'Dynamics'
-],
+"Dynamics, Dynamical Systems": [
+	"Dynamical Systems", 
+	"Dynamics"
+	],
 
-'Theory, Algorithms': [
-'Theory', 
-'Algorithms'
-],
+"Theory, Algorithms": [
+	"Theory", 
+	"Algorithms"
+	],
 
-'Tissues and Organs': [
-'Tissues', 
-'Organs'
-]
+"Tissues and Organs": [
+	"Tissues", 
+	"Organs"
+	]
 
 }
