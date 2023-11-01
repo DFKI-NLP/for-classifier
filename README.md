@@ -23,9 +23,11 @@ python data_prep/entity_embeddings/get_kg_texts.py
 4. Create binary dataset for classifier:
 
 ```commandline
+python data_prep/data_for_classifier.py
 ```
 
 ## To run classifier:
 
 ```commandline
+python models/kge_classifier.py
 ```
