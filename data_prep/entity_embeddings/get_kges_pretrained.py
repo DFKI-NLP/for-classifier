@@ -1,18 +1,11 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-from sklearn.manifold import TSNE
-from cachetools import MRUCache
 import numpy as np
-
-from pyrdf2vec import RDF2VecTransformer
-from pyrdf2vec.embedders import Word2Vec
-from pyrdf2vec.graphs import KG
-from pyrdf2vec.walkers import RandomWalker
 
 import torch
 
-RANDOM_STATE = 22
-
+from zipfile import ZipFile
+import fileinput
 
 def get_list_of_entities(linked_taxonomy: dict) -> list:
     """
@@ -29,6 +22,37 @@ def get_list_of_entities(linked_taxonomy: dict) -> list:
     entities = list(set(entities))
 
     return entities
+
+def get_pretrained_embeddings(linked_taxonomy: dict, input_file: str) -> dict:
+
+    entities = []
+
+    for key, value in for_linking.items():
+        entities.append(list(value.keys()))
+
+    flat_entities = [item for sublist in entities for item in sublist]
+    flat_entities = list(set(flat_entities))
+
+    entities_embeddings = []
+
+    for i in range(100000):
+        for lines in range(i*1000, 1000*(i+1)):
+            line = input_file.readline()
+            line = line.split()
+            if line[0] in flat_entities:
+                entities_embeddings.append(line)
+
+    entity_embeddings_dict = {}
+
+    for index, element in enumerate(flat_entities):
+        entity_embeddings_dict[element] = []
+
+    for entity in entities_embeddings:
+        embedding_str = entity[1:]
+        embedding_fl = [float(i) for i in embedding_str]
+        entity_embeddings_dict[entity[0]] = embedding_fl
+
+    return entity_embeddings_dict
 
 
 def get_taxonomy_embeddings(dbpedia_embeddings: pd.DataFrame, linked_taxonomy: dict) -> dict:
@@ -65,34 +89,22 @@ def main():
 
     entities = get_list_of_entities(linked_taxonomy)
 
-    # Initiate the RDF2VecTransformer
-    transformer = RDF2VecTransformer(
-        # Use one worker threads for Word2Vec to ensure random determinism.
-        Word2Vec(workers=1),
-        # Extract a maximum of 10 walks of a maximum depth of 4 for each entity
-        # using two processes and use a random state to ensure that the same walks
-        # are generated for the entities.
-        walkers=[RandomWalker(10, 500, n_jobs=2, random_state=RANDOM_STATE)],
-        verbose=1,
-    )
+    print("Getting pre-trained embeddings...")
+    # Get dataset of pretrained embeddings from Zenodo: https://zenodo.org/records/6384728
+    zip = ZipFile('../../data/embeddings.zip')
+    zip.extractall('../../data/')
+    zip.close()
+
     print("Getting KG embeddings...")
 
-    # Get embeddings for each entity
-    embeddings_pyrdf2vec, _ = transformer.fit_transform(
-        # Defined the DBpedia endpoint server, as well as a set of predicates to
-        # exclude from this KG.
-        KG("https://dbpedia.org/sparql"),
-        [entity for entity in entities]
-    )
+    # Read data
+    input_file = open('../../data/vectors.txt','r')
 
-    dbpedia_embeddings = pd.DataFrame(list(zip(entities, embeddings_pyrdf2vec)),
-                                      columns=['entity', 'embedding'])
-
-    taxonomy_embeddings = get_taxonomy_embeddings(dbpedia_embeddings, linked_taxonomy)
+    taxonomy_embeddings = get_pretrained_embeddings(linked_taxonomy, input_file)
     print('Sucessfully embedded taxonomy labels!')
 
-    torch.save(taxonomy_embeddings, '../../data/taxonomy_embeddings.pt')
-    print('Saved in "/data/taxonomy_embeddings.pt"')
+    torch.save(taxonomy_embeddings, '../../data/taxonomy_embeddings_pretrained.pt')
+    print('Saved in "/data/taxonomy_embeddings_pretrained.pt"')
 
 
 if __name__ == '__main__':

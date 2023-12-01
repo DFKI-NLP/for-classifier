@@ -8,7 +8,8 @@ from transformers import AutoTokenizer
 
 random.seed(42)
 
-def get_binary_dataset(dataset, negative_samples = 3):
+
+def get_binary_dataset(dataset, negative_samples=3):
     """
     A function that takes the input .csv FoRC dataset and returns a new dataset that
     consists of a list of tuples. Each tuple is defined as follows:
@@ -26,23 +27,23 @@ def get_binary_dataset(dataset, negative_samples = 3):
     labels, labels_mapping = get_categorical_labels(dataset)
 
     for idx, row in dataset.iterrows():
-    
+
         # positive sample (1 per paper)
         label = labels[idx]
         binary_dataset.append(((idx, label), 1))
-        
+
         # negative samples (according to the defined variable)
         unique_labels_list = list(set(labels))
         unique_labels_list.remove(label)
         negative_labels = random.sample(unique_labels_list, negative_samples)
-        
+
         for category in negative_labels:
             binary_dataset.append(((idx, category), 0))
 
     return binary_dataset, labels_mapping
 
-def clean_data(data: pd.DataFrame):
 
+def clean_data(data: pd.DataFrame):
     texts_rows = []
     tokenizer = AutoTokenizer.from_pretrained('malteos/scincl')
 
@@ -63,12 +64,13 @@ def clean_data(data: pd.DataFrame):
             text = row['title'] + tokenizer.sep_token + row['abstract']
         else:
             text = row['title']
-        
+
         texts_rows.append(text)
 
     data['document_text'] = texts_rows
-         
+
     return data
+
 
 def get_categorical_labels(data):
     """
@@ -86,6 +88,7 @@ def get_categorical_labels(data):
 
     return labels, labels_mapping
 
+
 def get_dataset(binary_datapoint, dataset, taxonomy_texts, taxonomy_embeddings, classes_mapping_rev):
     """
     input data point will be in the format of ((26, 89), 1) denoting ((idx in dataset, idx of FoR class), binary label)
@@ -93,33 +96,32 @@ def get_dataset(binary_datapoint, dataset, taxonomy_texts, taxonomy_embeddings, 
     dataset_idx = binary_datapoint[0][0]
     class_idx = binary_datapoint[0][1]
     label = binary_datapoint[1]
-    
-    
+
     # 1. get tokenized document text
     tokenized_document_text = dataset['document_text'][dataset_idx]
-    
+
     # 2. get tokenized class text (i.e. ORKG label[SEP]DBpedia label(s)[SEP]DBpedia abstract(s))
     tokenized_class_text = taxonomy_texts[classes_mapping_rev[class_idx]]
-    
+
     # 3. get class DBpedia embedding
     class_dbpedia_KGE = taxonomy_embeddings[classes_mapping_rev[class_idx]].astype(np.float64)
 
     return tokenized_document_text, tokenized_class_text, class_dbpedia_KGE, label
 
-def get_classifier_data(binary_dataset, dataset, taxonomy_texts, taxonomy_embeddings, labels_mapping):
 
+def get_classifier_data(binary_dataset, dataset, taxonomy_texts, taxonomy_embeddings, labels_mapping):
     document_text_list = []
     class_text_list = []
     class_kge_list = []
     label_list = []
 
-    classes_mapping_rev = dict((v,k) for k,v in labels_mapping.items())
-    
+    classes_mapping_rev = dict((v, k) for k, v in labels_mapping.items())
+
     for data_point in binary_dataset:
-        document_text, class_text, class_dbpedia_KGE, label = get_dataset(data_point, 
-                                                                          dataset, 
-                                                                          taxonomy_texts, 
-                                                                          taxonomy_embeddings, 
+        document_text, class_text, class_dbpedia_KGE, label = get_dataset(data_point,
+                                                                          dataset,
+                                                                          taxonomy_texts,
+                                                                          taxonomy_embeddings,
                                                                           classes_mapping_rev)
         document_text_list.append(document_text)
         class_text_list.append(class_text)
@@ -128,12 +130,12 @@ def get_classifier_data(binary_dataset, dataset, taxonomy_texts, taxonomy_embedd
 
     return document_text_list, class_text_list, class_kge_list, label_list
 
-def main():
 
+def main():
     data = pd.read_csv('~/documents/forc_I_dataset_FINAL_September.csv')
     cleaned_data = clean_data(data)
     print("Cleaned data...")
-    
+
     # get binary data that consists of ((row_number, category_number), binary_label)
     binary_data, labels_mapping = get_binary_dataset(cleaned_data)
     # shuffle data
@@ -144,12 +146,12 @@ def main():
     taxonomy_texts = torch.load('../data/taxonomy_texts.pt')
     taxonomy_embeddings = torch.load('../data/taxonomy_embeddings.pt')
 
-    document_text_list, class_text_list, class_kge_list, label_list = get_classifier_data(binary_data, 
-                                                                                          cleaned_data, 
+    document_text_list, class_text_list, class_kge_list, label_list = get_classifier_data(binary_data,
+                                                                                          cleaned_data,
                                                                                           taxonomy_texts,
                                                                                           taxonomy_embeddings,
                                                                                           labels_mapping)
-    
+
     print("Constructed input for classifier successfully!")
 
     torch.save(document_text_list, '../data/classifier/documents_text.pt')
@@ -158,6 +160,7 @@ def main():
     torch.save(label_list, '../data/classifier/labels.pt')
 
     print("Saved data under ../data/classifier/")
+
 
 if __name__ == '__main__':
     main()
