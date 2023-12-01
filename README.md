@@ -23,17 +23,20 @@ The models also have different methods to semantically represent fields of resea
 
 ## Dataset
 
+#### All data required for running the classifiers are available for download at: 
 
+However, this repository also contains the code for creating the data (including linking ORKG labels to DBpedia entities) under ```data_prep``` directory. 
+The data is prepared by using the nfdi4ds dataset for the field of research classification (FoRC) shared task. The code for creating this dataset can be found [here](https://github.com/ryabhmd/nfdi4ds-forc). A link to download the dataset can be provided in order to run the steps below.  
 
-## To create the classification dataset from the FoRC pre-prepared dataset: 
-
-1. Link the taxonomy to DBpedia entities:
+1. Link the ORKG taxonomy to DBpedia entities:
 
 ```commandline
 python data_prep/entity_linking/entity_linking.py
 ```
 
 2. Create KGEs of taxonomy labels:
+
+  Note that this step includes downloading a pre-trained DBpedia embeddings dataset from Zenodo (https://zenodo.org/records/6384728) and thus requires enough space. Additionally, it will take up to 2 hours to dowanload and process.
 
 ```commandline
 python data_prep/entity_embeddings/get_kges.py
@@ -45,19 +48,46 @@ python data_prep/entity_embeddings/get_kges.py
 python data_prep/entity_embeddings/get_kg_texts.py
 ```
 
-4. Create binary dataset for classifier:
+4. Create a binary dataset for classifier:
 
 ```commandline
 python data_prep/data_for_classifier.py
 ```
 
-## To run models:
+## Models:
 
+1. Categorical baseline:
+  ```commandline
+python models/categorical_baseline.py
+```
+
+2. Pairwise text classifier (class features either ORKG labels or DBpedia entities text):
 ```commandline
-python models/kge_classifier.py
+python models/text_classifier_trainer.py
+```
+
+3. KGEs only:
+```commandline
+python models/kge-only-classifier.py
+```
+
+4. Adding author embeddings:
+```commandline
+python models/kge-authors-classifier.py
+```
+
+5. Adding publishers embeddings:
+```commandline
+python models/kge-publishers-classifier.py
+```
+
+6. Full metadata:
+```commandline
+python models/kge-authors-publishers-classifier.py
 ```
 
 ## Results
+
 <p align="center">
   <img src="https://github.com/ryabhmd/for-classifier/assets/77779090/a0038c81-e08e-415b-a542-c01ae95c2938" height="600" width="600"/>
 
