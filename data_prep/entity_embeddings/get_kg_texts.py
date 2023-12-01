@@ -7,7 +7,6 @@ import sparql_dataframe
 
 
 def get_academicDisciplines():
-
     endpoint = "http://dbpedia.org/sparql"
 
     query = """
@@ -16,14 +15,14 @@ def get_academicDisciplines():
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         PREFIX dbo:  <http://dbpedia.org/ontology/>
 
-        SELECT DISTINCT ?discipline ?label ?abstract
+        SELECT DISTINCT ?discipline ?label ?comment
 
         WHERE {
         ?subject dbo:academicDiscipline ?discipline .
         ?discipline rdfs:label ?label ;
-                        dbo:abstract ?abstract .
+                        rdfs:comment ?comment .
         FILTER (LANG(?label)="en") .
-        FILTER (LANG(?abstract)="en") .
+        FILTER (LANG(?comment)="en") .
         }
     """
 
@@ -31,6 +30,7 @@ def get_academicDisciplines():
     academicDisciplines = sparql_dataframe.get(endpoint, query)
 
     return academicDisciplines
+
 
 def get_label_texts(dbpedia_disciplines: pd.DataFrame, for_linking: dict, tokenizer: AutoTokenizer) -> dict:
     """
@@ -53,26 +53,24 @@ def get_label_texts(dbpedia_disciplines: pd.DataFrame, for_linking: dict, tokeni
     for_texts = {key: default_list[:] for key in for_linking}
 
     for for_label, linked_entities in for_linking.items():
-        for_textual_info = []
-    
-        for_textual_info.append(for_label)
-        
+        for_textual_info = [for_label]
+
         for entity, weight in linked_entities.items():
-            entity_label = dbpedia_disciplines[dbpedia_disciplines['discipline']==entity]['label'].values[0]
+            entity_label = dbpedia_disciplines[dbpedia_disciplines['discipline'] == entity]['label'].values[0]
             for_textual_info.append(entity_label)
-            
-            entity_abstract = dbpedia_disciplines[dbpedia_disciplines['discipline']==entity]['abstract'].values[0]
-            for_textual_info.append(entity_abstract)
-            
+
+            entity_comment = dbpedia_disciplines[dbpedia_disciplines['discipline'] == entity]['comment'].values[0]
+            for_textual_info.append(entity_comment)
+
             text_for_tokenizer = [text + tokenizer.sep_token for text in for_textual_info]
-            text_for_tokenizer = ''.join(text_for_tokenizer)[:-5]
-        
+            text_for_tokenizer = tokenizer.cls_token + ''.join(text_for_tokenizer)[:-5]
+
         for_texts[for_label] = text_for_tokenizer
-    
+
     return for_texts
 
+
 def main():
-    
     tokenizer = AutoTokenizer.from_pretrained('malteos/scincl')
 
     academicDisciplines = get_academicDisciplines()
