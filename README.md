@@ -6,10 +6,23 @@
 
 ## Description
 
-This repository holds the code for my master's thesis project, which investigates classifying scholarly articles into research fields by exploring knowledge injection approaches.
+This repository holds the code for my master's thesis project, which investigates classifying scholarly articles into research fields by exploring knowledge injection approaches. 
+
+There are different models in the ```models``` directory that utilise different features from scholarly articles: 
+- Titles + abstracts
+- Authors
+- Publishers
+- Full metadata
+  
+The models also have different methods to semantically represent fields of research: 
+- Categorical (baseline)
+- Using taxonomy labels (the taxonomy used is https://orkg.org/fields)
+- Linking labels to DBpedia entities and using the text under rdfs:label + rdfs:comment
+- Linking labels to DBpedia entities and using knowledge graph embeddings (pre-trained embeddings from https://zenodo.org/records/6384728)
 
 
 ## Dataset
+
 
 
 ## To create the classification dataset from the FoRC pre-prepared dataset: 
@@ -38,8 +51,16 @@ python data_prep/entity_embeddings/get_kg_texts.py
 python data_prep/data_for_classifier.py
 ```
 
-## To run classifier:
+## To run models:
 
 ```commandline
 python models/kge_classifier.py
 ```
+
+## Results
+<p align="center">
+  <img src="https://github.com/ryabhmd/for-classifier/assets/77779090/a0038c81-e08e-415b-a542-c01ae95c2938" height="600" width="600"/>
+
+</p>
+
+
