@@ -1,4 +1,16 @@
-# for-classifier
+
+
+# Investigating Approaches for Field of Research Classification of Scholarly Articles 
+![header](https://github.com/ryabhmd/for-classifier/assets/77779090/d06d9eb0-a581-4982-84b2-d68d3e09c72e)
+
+
+## Description
+
+This repository holds the code for my master's thesis project, which investigates classifying scholarly articles into research fields by exploring knowledge injection approaches.
+
+
+## Dataset
+
 
 ## To create the classification dataset from the FoRC pre-prepared dataset: 
 
