@@ -56,7 +56,7 @@ python data_prep/entity_embeddings/get_kg_texts.py
 python data_prep/data_for_classifier.py
 ```
 
-## Models:
+## Models
 
 1. Categorical baseline:
   ```commandline
