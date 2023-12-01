@@ -7,6 +7,7 @@ import torch
 from zipfile import ZipFile
 import fileinput
 
+
 def get_list_of_entities(linked_taxonomy: dict) -> list:
     """
     A function that gets the linked taxonomy dictionary as an input and outputs a list of all unique DBpedia entities
@@ -23,8 +24,8 @@ def get_list_of_entities(linked_taxonomy: dict) -> list:
 
     return entities
 
-def get_pretrained_embeddings(linked_taxonomy: dict, input_file: str) -> dict:
 
+def get_pretrained_embeddings(linked_taxonomy: dict, input_file: str) -> dict:
     entities = []
 
     for key, value in for_linking.items():
@@ -36,7 +37,7 @@ def get_pretrained_embeddings(linked_taxonomy: dict, input_file: str) -> dict:
     entities_embeddings = []
 
     for i in range(100000):
-        for lines in range(i*1000, 1000*(i+1)):
+        for lines in range(i * 1000, 1000 * (i + 1)):
             line = input_file.readline()
             line = line.split()
             if line[0] in flat_entities:
@@ -98,10 +99,10 @@ def main():
     print("Getting KG embeddings...")
 
     # Read data
-    input_file = open('../../data/vectors.txt','r')
+    input_file = open('../../data/vectors.txt', 'r')
 
     taxonomy_embeddings = get_pretrained_embeddings(linked_taxonomy, input_file)
-    print('Sucessfully embedded taxonomy labels!')
+    print('Successfully embedded taxonomy labels!')
 
     torch.save(taxonomy_embeddings, '../../data/taxonomy_embeddings_pretrained.pt')
     print('Saved in "/data/taxonomy_embeddings_pretrained.pt"')

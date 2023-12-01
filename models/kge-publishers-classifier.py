@@ -82,8 +82,6 @@ class ExtraBertClassifier(PreTrainedModel):
         return NextSentencePredictorOutput(
             loss=loss,
             logits=prob
-            # hidden_states=prob.hidden_states,
-            # attentions=prob.attentions,
         )
 
 
@@ -123,11 +121,11 @@ def prepare_dataset(document_text, class_kges, publisher_emb, class_text, labels
 
 def main():
     # Load dataset
-    document_text = torch.load('/netscratch/abu/classifier_data/September/document_text_list_3_neg.pt')
-    class_kges = torch.load('/netscratch/abu/classifier_data/September/class_new_KGEs_3_neg.pt')
-    publisher_emb = torch.load('/netscratch/abu/classifier_data/September/publisher_emb.pt')
-    class_text = torch.load('/netscratch/abu/classifier_data/September/class_texts_dbpedia_only_3_neg.pt')
-    labels = torch.load('/netscratch/abu/classifier_data/September/label_3_neg.pt')
+    document_text = torch.load('../../data/document_text_list.pt')
+    class_kges = torch.load('../../data/class_new_KGEs.pt')
+    publisher_emb = torch.load('../../data/publisher_emb.pt')
+    class_text = torch.load('../../data/class_texts_dbpedia_only.pt')
+    labels = torch.load('../../data/labels.pt')
     labels = [float(label) for label in labels]
 
     # Define DataCollocator

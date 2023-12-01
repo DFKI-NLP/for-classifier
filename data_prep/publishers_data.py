@@ -5,6 +5,7 @@ import string
 from string import digits
 import torch
 
+
 def clean_publisher(publisher):
     """
     A function that gets the "publisher" string and returns it after the following pre-processing steps: 
@@ -24,13 +25,13 @@ def clean_publisher(publisher):
         clean_publisher = clean_publisher.translate(remove_punctuation)
         # remove white spaces
         clean_publisher = " ".join(clean_publisher.split())
-        
+
         return clean_publisher
     else:
         return publisher
-    
-def get_publisher_dict(data: pd.DataFrame) -> list:
 
+
+def get_publisher_dict(data: pd.DataFrame) -> list:
     default_list = []
     publisher_dict = {key: default_list[:] for key in set(data['clean_publisher'].values)}
 
@@ -40,11 +41,11 @@ def get_publisher_dict(data: pd.DataFrame) -> list:
 
     return publisher_dict
 
-def get_publisher_embeddings(data: pd.DataFrame, 
-                          author_dict: dict, 
-                          tokenizer: AutoTokenizer, 
-                          model: AutoModel) -> dict:
 
+def get_publisher_embeddings(data: pd.DataFrame,
+                             author_dict: dict,
+                             tokenizer: AutoTokenizer,
+                             model: AutoModel) -> dict:
     default_list = []
     publisher_embedding_dict = {key: default_list[:] for key in set(author_dict)}
 
@@ -62,13 +63,13 @@ def get_publisher_embeddings(data: pd.DataFrame,
             indices_embeddings.append(embedding)
 
         # the embedding representing each author is the average embedding of all the publications they wrote
-        publisher_embedding_dict[publisher] = sum(indices_embeddings)/len(indices_embeddings)
+        publisher_embedding_dict[publisher] = sum(indices_embeddings) / len(indices_embeddings)
 
     return publisher_embedding_dict
 
-def get_data_with_publisher_embedding(data: pd.DataFrame, 
-                                    publisher_embedding_dict: dict) -> pd.DataFrame:
 
+def get_data_with_publisher_embedding(data: pd.DataFrame,
+                                      publisher_embedding_dict: dict) -> pd.DataFrame:
     publisher_author_embeddings = []
 
     for idx, row in data.iterrows():
@@ -78,25 +79,24 @@ def get_data_with_publisher_embedding(data: pd.DataFrame,
             if author in row_publisher:
                 row_publisher_embedding.append(embedding)
         # the author embedding of each row is the average of all of its authors' embeddings
-        publisher_author_embeddings.append(sum(row_publisher_embedding)/len(row_publisher_embedding))
+        publisher_author_embeddings.append(sum(row_publisher_embedding) / len(row_publisher_embedding))
 
     data['publishers_embedding'] = publisher_author_embeddings
 
     return data
 
-def get_embeddings_for_binary_classifier(data, binary_data):
 
+def get_embeddings_for_binary_classifier(data, binary_data):
     publisher_embeddings_for_binary_classifier = []
 
     for data_point in binary_data:
         row_idx = data_point[0][0]
         publisher_embeddings_for_binary_classifier.append(data['publishers_embedding'][row_idx])
-    
+
     return publisher_embeddings_for_binary_classifier
 
 
 def main():
-
     data = pd.read_csv('~/documents/forc_I_dataset_FINAL_September.csv')
     # Add a column with clean (i.e. preprocessed) publishers
     data['clean_publisher'] = [clean_publisher(row['publisher']) for index, row in data.iterrows()]
@@ -108,7 +108,8 @@ def main():
     tokenizer = AutoTokenizer.from_pretrained('malteos/scincl')
     model = AutoModel.from_pretrained('malteos/scincl')
 
-    # A dictionary of {unique_publisher: their embedding (the average of the title+abstract embedding of all their papers)}
+    # A dictionary of {unique_publisher: their embedding (the average of the title+abstract embedding of all their
+    # papers)}
 
     publisher_embedding_dict = get_publisher_embeddings(data, publisher_dict, tokenizer, model)
 
@@ -121,7 +122,7 @@ def main():
     # list of author embeddings according to binary dataset, to be used as input for the binary classifier
     publisher_embeddings_for_binary_classifier = get_embeddings_for_binary_classifier(data, binary_data)
 
-    torch.save(publisher_embeddings_for_binary_classifier, '../../data/classifier/publisher_embeddings.pt')     
+    torch.save(publisher_embeddings_for_binary_classifier, '../../data/classifier/publisher_embeddings.pt')
 
 
 if __name__ == '__main__':

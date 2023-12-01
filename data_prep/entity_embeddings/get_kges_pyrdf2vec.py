@@ -89,7 +89,7 @@ def main():
                                       columns=['entity', 'embedding'])
 
     taxonomy_embeddings = get_taxonomy_embeddings(dbpedia_embeddings, linked_taxonomy)
-    print('Sucessfully embedded taxonomy labels!')
+    print('Successfully embedded taxonomy labels!')
 
     torch.save(taxonomy_embeddings, '../../data/taxonomy_embeddings.pt')
     print('Saved in "/data/taxonomy_embeddings.pt"')

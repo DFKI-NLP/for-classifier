@@ -69,7 +69,7 @@ class ExtraBertClassifier(PreTrainedModel):
         authors_emb = authors_emb.to(device)
 
         publisher_emb = torch.as_tensor(publisher_emb)
-        publisher_emb = authors_emb.to(device)
+        publisher_emb = publisher_emb.to(device)
 
         concat_output = torch.cat((text_embeddings, kg_embeddings, authors_emb, publisher_emb), dim=1)
         mlp_output = self.mlp(concat_output)
@@ -135,12 +135,12 @@ def prepare_dataset(document_text, class_kges, authors_emb, publisher_emb, class
 def main():
 
     # Load dataset
-    document_text = torch.load('/netscratch/abu/classifier_data/September/document_text_list_3_neg.pt')
-    class_kges = torch.load('/netscratch/abu/classifier_data/September/class_new_KGEs_3_neg.pt')
-    authors_emb = torch.load('/netscratch/abu/classifier_data/September/authors_emb.pt')
-    publisher_emb = torch.load('/netscratch/abu/classifier_data/September/publisher_emb.pt')
-    class_text = torch.load('/netscratch/abu/classifier_data/September/class_texts_dbpedia_only_3_neg.pt')
-    labels = torch.load('/netscratch/abu/classifier_data/September/label_3_neg.pt')
+    document_text = torch.load('../../data/document_text_list.pt')
+    class_kges = torch.load('../../data/class_new_KGEs.pt')
+    authors_emb = torch.load('../../data/authors_emb.pt')
+    publisher_emb = torch.load('../../data/publisher_emb.pt')
+    class_text = torch.load('../../data/class_texts_dbpedia_only.pt')
+    labels = torch.load('../../data/labels.pt')
     labels = [float(label) for label in labels]
 
     # Define DataCollocator
@@ -161,7 +161,7 @@ def main():
 
     # Define TrainingArguments
     training_args = TrainingArguments(
-        output_dir="/netscratch/abu/text_classifiers/models",
+        output_dir="../../results/models",
         report_to="wandb",
         logging_steps=5,
         per_device_train_batch_size=32,
@@ -211,7 +211,7 @@ def main():
     print(f'F1: {f1}')
 
     # Save model
-    trainer.save_model("/netscratch/abu/text_classifiers/models")
+    trainer.save_model("../../results/models")
 
 
 if __name__ == '__main__':

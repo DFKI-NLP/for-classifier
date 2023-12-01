@@ -79,8 +79,6 @@ class ExtraBertClassifier(PreTrainedModel):
         return NextSentencePredictorOutput(
             loss=loss,
             logits=prob
-            # hidden_states=prob.hidden_states,
-            # attentions=prob.attentions,
         )
 
 
@@ -111,9 +109,9 @@ def prepare_dataset(document_text, class_kges, labels):
 
 def main():
     # Load dataset
-    document_text = torch.load('/netscratch/abu/classifier_data/September/document_text_list_3_neg.pt')
-    class_kges = torch.load('/netscratch/abu/classifier_data/September/class_new_KGEs_3_neg.pt')
-    labels = torch.load('/netscratch/abu/classifier_data/September/label_3_neg.pt')
+    document_text = torch.load('../../data/document_text_list.pt')
+    class_kges = torch.load('../../data/class_new_KGEs.pt')
+    labels = torch.load('../../data/labels.pt')
     labels = [float(label) for label in labels]
 
     # Define DataCollocator
@@ -134,7 +132,7 @@ def main():
 
     # Define TrainingArguments
     training_args = TrainingArguments(
-        output_dir="/netscratch/abu/text_classifiers/models",
+        output_dir="../../results/models",
         report_to="wandb",
         logging_steps=5,
         per_device_train_batch_size=32,
@@ -184,7 +182,7 @@ def main():
     print(f'F1: {f1}')
 
     # Save model
-    trainer.save_model("/netscratch/abu/text_classifiers/models")
+    trainer.save_model("../../results/models")
 
 
 if __name__ == '__main__':
