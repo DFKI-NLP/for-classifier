@@ -23,7 +23,9 @@ The models also have different methods to semantically represent fields of resea
 
 ## Dataset
 
-#### All data required for running the classifiers are available for download at: 
+#### *All data required for running the classifiers are available for download at: https://zenodo.org/records/10245830.*
+
+
 
 However, this repository also contains the code for creating the data (including linking ORKG labels to DBpedia entities) under ```data_prep``` directory. 
 The data is prepared by using the nfdi4ds dataset for the field of research classification (FoRC) shared task. The code for creating this dataset can be found [here](https://github.com/ryabhmd/nfdi4ds-forc). A link to download the dataset can be provided in order to run the steps below.  
