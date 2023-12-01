@@ -7,6 +7,7 @@ import time
 
 import spacy
 import nltk
+
 nltk.download('stopwords')
 from nltk.corpus import stopwords
 
@@ -20,6 +21,7 @@ import torch
 import sparql_dataframe
 from http.client import IncompleteRead, RemoteDisconnected
 import http.client
+
 http.client.HTTPConnection._http_vsn = 10
 http.client.HTTPConnection._http_vsn_str = 'HTTP/1.0'
 
@@ -33,26 +35,16 @@ def get_academicDisciplines():
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         PREFIX dbo:  <http://dbpedia.org/ontology/>
 
-        SELECT DISTINCT ?discipline ?label ?abstract
+        SELECT DISTINCT ?discipline ?label ?comment
 
         WHERE {
         ?subject dbo:academicDiscipline ?discipline .
         ?discipline rdfs:label ?label ;
-                        dbo:abstract ?abstract .
+                        rdfs:comment ?comment .
         FILTER (LANG(?label)="en") .
-        FILTER (LANG(?abstract)="en") .
+        FILTER (LANG(?comment)="en") .
         }
     """
-
-    # use sparql_dataframe; a library that return results of SPARQL queries as pandas DataFrames
-    try:
-        academicDisciplines = sparql_dataframe.get(endpoint, query)
-    except RemoteDisconnected:
-        time.sleep(60)
-        academicDisciplines = sparql_dataframe.get(endpoint, query)
-    except IncompleteRead:
-        time.sleep(60)
-        academicDisciplines = sparql_dataframe.get(endpoint, query)
 
     return academicDisciplines
 
@@ -100,7 +92,8 @@ def get_labels_list(complex_label_doc):  # input is the label after it gets proc
             if any(token in child for child in labels_children):
                 # If the token is the child of one of the compounds/modifiers
                 for idx, child in enumerate(labels_children):
-                    # Add it to the list of simplified labels by concatenating it to the first word in the compound/modifier
+                    # Add it to the list of simplified labels by concatenating it to the first word in the
+                    # compound/modifier
                     if token in child:
                         labels.append(token + ' ' + labels[idx].split(" ")[-1])
             else:
@@ -153,7 +146,7 @@ def get_for_values(data: pd.DataFrame) -> list:
 
 
 def main():
-    data = pd.read_csv('/netscratch/abu/forc_I_dataset_FINAL_September.csv')
+    data = pd.read_csv('/data/forc_I_dataset_FINAL.csv')
 
     # list of FoR
     for_flat_list = get_for_values(data)
