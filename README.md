@@ -42,7 +42,7 @@ python data_prep/entity_linking/entity_linking.py
   In order to run the code, the dataset from Zenodo should be downloaded by running ```zenodo_get -d '10.5281/zenodo.6384728'```.
 
 ```commandline
-python data_prep/entity_embeddings/get_kges.py
+python data_prep/entity_embeddings/get_kges_pretrained.py
 ```
 
   Alternatively, KGEs can be constructed using [pyRDF2Vec](https://github.com/IBCNServices/pyRDF2Vec), which is a process that takes less time. However, the models perform better using the pre-trained embeddings as opposed to using pyRDF2Vec.
