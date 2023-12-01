@@ -95,6 +95,6 @@ python models/kge-authors-publishers-classifier.py
 
 </p>
 
-Additional graphs and comparisons between the model can be seen at: https://api.wandb.ai/links/raya-abu-ahmad/ykbq4ke4. 
+Additional graphs and comparisons between the models can be seen at: https://api.wandb.ai/links/raya-abu-ahmad/ykbq4ke4. 
 
 
