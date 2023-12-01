@@ -51,13 +51,13 @@ python data_prep/entity_embeddings/get_kges_pretrained.py
 python data_prep/entity_embeddings/get_kges_pyrdf2vec.py
 ```
 
-3. Create textual representations of taxonomy labels:
+3. Create textual representations from DBpedia of taxonomy labels:
 
 ```commandline
 python data_prep/entity_embeddings/get_kg_texts.py
 ```
 
-4. Create a binary dataset for classifier:
+4. Create the binary dataset for the classifier:
 
 ```commandline
 python data_prep/data_for_classifier.py
