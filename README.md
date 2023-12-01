@@ -38,7 +38,8 @@ python data_prep/entity_linking/entity_linking.py
 
 2. Create KGEs of taxonomy labels:
 
-  Note that this step includes downloading a pre-trained DBpedia embeddings dataset from Zenodo (https://zenodo.org/records/6384728) and thus requires enough space. Additionally, it will take up to 2 hours to dowanload and process.
+  Note that this step includes downloading a pre-trained DBpedia embeddings dataset from Zenodo (https://zenodo.org/records/6384728) and thus requires enough space. Additionally, it will take up to 2 hours to download and process.
+  In order to run the code, the dataset from Zenodo should be downloaded by running ```zenodo_get -d '10.5281/zenodo.6384728'```.
 
 ```commandline
 python data_prep/entity_embeddings/get_kges.py
