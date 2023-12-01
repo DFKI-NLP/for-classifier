@@ -16,19 +16,20 @@ import evaluate
 
 device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
 tokenizer = AutoTokenizer.from_pretrained('malteos/scincl')
-wandb.init(project="kge-pairwise-classifier-trainer", entity="raya-abu-ahmad")
+wandb.init(project="kge-only-classifier-trainer", entity="raya-abu-ahmad")
 
 
 class MyConfig(PretrainedConfig):
     model_type = 'mymodel'
 
-    def __init__(self, labels_count=1, hidden_dim=768, mlp_dim=100, kg_dim=200, dropout=0.1):
+    def __init__(self, labels_count=1, hidden_dim=768, mlp_dim=100, kg_dim=200, publisher_dim=768, dropout=0.1):
         super().__init__()
 
         self.labels_count = labels_count
         self.hidden_dim = hidden_dim
         self.mlp_dim = mlp_dim
         self.kg_dim = kg_dim
+        self.publisher_dim = publisher_dim
         self.dropout = dropout
 
 
@@ -85,18 +86,16 @@ class ExtraBertClassifier(PreTrainedModel):
 
 def tokenize_function(example):
     return tokenizer(example["document_text"],
-                     example["class_text"],
                      truncation=True, max_length=512,
                      return_tensors="pt",
                      padding=True)
 
 
-def prepare_dataset(document_text, class_kges, class_text, labels, tokenizer):
+def prepare_dataset(document_text, class_kges, labels):
     # Define dataset dictionary
     my_data = {
         'document_text': document_text,
         'class_kge': class_kges,
-        'class_text': class_text,
         'label': labels,
         'idx': [float(num) for num in range(len(labels))]
     }
@@ -114,7 +113,6 @@ def main():
     # Load dataset
     document_text = torch.load('/netscratch/abu/classifier_data/September/document_text_list_3_neg.pt')
     class_kges = torch.load('/netscratch/abu/classifier_data/September/class_new_KGEs_3_neg.pt')
-    class_text = torch.load('/netscratch/abu/classifier_data/September/class_texts_dbpedia_only_3_neg.pt')
     labels = torch.load('/netscratch/abu/classifier_data/September/label_3_neg.pt')
     labels = [float(label) for label in labels]
 
@@ -122,7 +120,7 @@ def main():
     data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
 
     # Prepare dataset
-    tokenized_dataset = prepare_dataset(document_text, class_kges, class_text, labels, tokenizer)
+    tokenized_dataset = prepare_dataset(document_text, class_kges, labels)
 
     # Define model
     model = AutoModel.from_pretrained('malteos/scincl')
