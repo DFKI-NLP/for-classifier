@@ -25,7 +25,7 @@ The models also have different methods to semantically represent fields of resea
 
 #### Download pre-prepared dataset
 
-All data required for running the classifiers are available for download at: https://zenodo.org/records/10245830.
+All data required for running the classifiers are available for download at: https://zenodo.org/records/10245830. After downloading, please save all ".pt" files under ```data/classifier``` in order to be able to train and test the models.
 
 #### Construct dataset
 
@@ -40,9 +40,9 @@ python data_prep/entity_linking/entity_linking.py
 
 2. Create KGEs of taxonomy labels:
 
-  Note that this step includes downloading a pre-trained DBpedia embeddings dataset from Zenodo (https://zenodo.org/records/6384728) and thus requires enough space. Additionally, it will take up to 2 hours to download and process.
+  Note that this step includes downloading a pre-trained DBpedia embeddings dataset from Zenodo (https://zenodo.org/records/6384728) and thus requires enough space. It will ca. 3 hours to download and ca. 1 hour to run the code in order to get the embeddings.
   In order to run the code, the dataset from Zenodo should be downloaded by running ```zenodo_get -d '10.5281/zenodo.6384728'```.
-  After obtaining the dataset, it should be saved under ```/data/embeddings.zip``` in order to run the code below.
+  After obtaining the dataset, it should be saved under ```/data/embeddings.zip```.
 
 ```commandline
 python data_prep/entity_embeddings/get_kges_pretrained.py
@@ -67,7 +67,7 @@ python data_prep/data_for_classifier.py
 ```
 
 5. Create authors and publishers embeddings:
-The code below creates embeddings for authors and publishers that can be used in the classifiers below. Note that both of these scripts use SciNCL to create embeddings of each title and abstract in the dataset and thus require enough system memory to run.
+The code below creates embeddings for authors and publishers that can be used in the classifiers below. Note that both of these scripts use SciNCL to create embeddings of each title and abstract in the dataset and thus require enough system memory to run. Each code will take ca. 3 hours to run. 
 
 ```commandline
 python data_prep/authors_data.py
