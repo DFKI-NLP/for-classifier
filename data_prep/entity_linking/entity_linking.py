@@ -189,7 +189,7 @@ def main():
     print('Sucessfully linked taxonomy!')
     print(linked_taxonomy)
 
-    torch.save(linked_taxonomy, '../../../data/linked_taxonomy.pt')
+    torch.save(linked_taxonomy, '/data/linked_taxonomy.pt')
     print('Saved in "/data/linked_taxonomy.pt"')
 
 

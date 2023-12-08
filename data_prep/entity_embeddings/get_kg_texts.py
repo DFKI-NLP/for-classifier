@@ -76,12 +76,12 @@ def main():
 
     academicDisciplines = get_academicDisciplines()
 
-    for_linking = torch.load('../../data/linked_taxonomy.pt')
+    for_linking = torch.load('data/linked_taxonomy.pt')
 
     print("Getting textual features of taxonomy labels...")
     for_texts = get_label_texts(academicDisciplines, for_linking, tokenizer)
 
-    torch.save(for_texts, '../../data/taxonomy_texts.pt')
+    torch.save(for_texts, 'data/taxonomy_texts.pt')
     print('Saved in "/data/taxonomy_texts.pt"')
 
 
