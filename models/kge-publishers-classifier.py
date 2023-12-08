@@ -121,11 +121,11 @@ def prepare_dataset(document_text, class_kges, publisher_emb, class_text, labels
 
 def main():
     # Load dataset
-    document_text = torch.load('../../data/document_text_list.pt')
-    class_kges = torch.load('../../data/class_new_KGEs.pt')
-    publisher_emb = torch.load('../../data/publisher_emb.pt')
-    class_text = torch.load('../../data/class_texts_dbpedia_only.pt')
-    labels = torch.load('../../data/labels.pt')
+    document_text = torch.load('data/classifier/document_text_list.pt')
+    class_kges = torch.load('data/classifier/class_new_KGEs.pt')
+    publisher_emb = torch.load('data/classifier/publisher_emb.pt')
+    class_text = torch.load('data/classifier/class_texts_dbpedia_only.pt')
+    labels = torch.load('data/classifier/labels.pt')
     labels = [float(label) for label in labels]
 
     # Define DataCollocator
@@ -146,7 +146,7 @@ def main():
 
     # Define TrainingArguments
     training_args = TrainingArguments(
-        output_dir="/netscratch/abu/text_classifiers/models",
+        output_dir="results/models",
         report_to="wandb",
         logging_steps=5,
         per_device_train_batch_size=32,
@@ -196,7 +196,7 @@ def main():
     print(f'F1: {f1}')
 
     # Save model
-    trainer.save_model("/netscratch/abu/text_classifiers/models")
+    trainer.save_model("results/models")
 
 
 if __name__ == '__main__':

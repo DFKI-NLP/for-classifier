@@ -108,9 +108,9 @@ def prepare_dataset(document_text, class_cat, labels):
 
 def main():
     # Load dataset
-    document_text = torch.load('../../data/document_text_list.pt')
-    class_cats = torch.load('../../data/class_category_list.pt')
-    labels = torch.load('../../data/labels.pt')
+    document_text = torch.load('data/classifier/document_text_list.pt')
+    class_cats = torch.load('data/classifier/class_category_list.pt')
+    labels = torch.load('data/classifier/labels.pt')
     labels = [float(label) for label in labels]
 
     # Define DataCollocator
@@ -131,7 +131,7 @@ def main():
 
     # Define TrainingArguments
     training_args = TrainingArguments(
-        output_dir="../../results/models",
+        output_dir="results/models",
         report_to="wandb",
         logging_steps=5,
         per_device_train_batch_size=32,
@@ -181,7 +181,7 @@ def main():
     print(f'F1: {f1}')
 
     # Save model
-    trainer.save_model("../../results/models/extra_bert_classifier.pt")
+    trainer.save_model("results/models/")
 
 
 if __name__ == '__main__':
