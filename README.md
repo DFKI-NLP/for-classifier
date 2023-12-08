@@ -23,11 +23,13 @@ The models also have different methods to semantically represent fields of resea
 
 ## Dataset
 
-#### *All data required for running the classifiers are available for download at: https://zenodo.org/records/10245830.*
+#### Download pre-prepared dataset
 
+All data required for running the classifiers are available for download at: https://zenodo.org/records/10245830.
 
+#### Construct dataset
 
-However, this repository also contains the code for creating the data (including linking ORKG labels to DBpedia entities) under ```data_prep``` directory. 
+This repository also contains the code for creating the data in the link above (including linking ORKG labels to DBpedia entities) under the ```data_prep``` directory. 
 The data is prepared by using the nfdi4ds dataset for the field of research classification (FoRC) shared task. The code for creating this dataset can be found [here](https://github.com/ryabhmd/nfdi4ds-forc). A link to download the dataset can be provided in order to run the steps below.  
 
 1. Link the ORKG taxonomy to DBpedia entities:
@@ -62,6 +64,17 @@ python data_prep/entity_embeddings/get_kg_texts.py
 
 ```commandline
 python data_prep/data_for_classifier.py
+```
+
+5. Create authors and publishers embeddings:
+The code below creates embeddings for authors and publishers that can be used in the classifiers below. Note that both of these scripts use SciNCL to create embeddings of each title and abstract in the dataset and thus require enough system memory to run.
+
+```commandline
+python data_prep/authors_data.py
+```
+
+```commandline
+python data_prep/publishers_data.py
 ```
 
 ## Models
