@@ -1,6 +1,6 @@
 
 
-# Investigating Approaches for Field of Research Classification of Scholarly Articles 
+# Investigating Knowledge Injection Approaches for Field of Research Classification of Scholarly Articles 
 ![header](https://github.com/ryabhmd/for-classifier/assets/77779090/d06d9eb0-a581-4982-84b2-d68d3e09c72e)
 
 
