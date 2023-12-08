@@ -6,7 +6,7 @@
 
 ## Description
 
-This repository holds the code for my master's thesis project, which investigates classifying scholarly articles into research fields by exploring knowledge injection approaches. The full thesis can be accessed [here](https://drive.google.com/file/d/1ga4mBRSt6WbY8TXBM1BgQGClyzWyq1dW/view?usp=drive_link) for more detailed information. 
+This repository holds the code for my master's thesis project, which investigates classifying scholarly articles into research fields by exploring knowledge injection approaches. The full thesis can be accessed [here](https://drive.google.com/file/d/1ga4mBRSt6WbY8TXBM1BgQGClyzWyq1dW/view?usp=sharing) for more detailed information. 
 
 There are different models in the ```models``` directory that utilise different features from scholarly articles: 
 - Titles + abstracts
