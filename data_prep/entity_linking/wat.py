@@ -1,6 +1,7 @@
 import json
 import requests as req
 
+
 # Code taken from the WAT API documentation: https://sobigdata.d4science.org/web/tagme/wat-api
 class WATAnnotation:
     # An entity annotated by WAT

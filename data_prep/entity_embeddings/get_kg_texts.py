@@ -6,7 +6,10 @@ import torch
 import sparql_dataframe
 
 
-def get_academicDisciplines():
+def get_academicDisciplines() -> pd.DataFrame:
+    """
+    A function that gets the academic disciplines from DBpedia
+    """
     endpoint = "http://dbpedia.org/sparql"
 
     query = """
@@ -26,7 +29,6 @@ def get_academicDisciplines():
         }
     """
 
-    # use sparql_dataframe; a library that return results of SPARQL queries as pandas DataFrames
     academicDisciplines = sparql_dataframe.get(endpoint, query)
 
     return academicDisciplines
@@ -40,12 +42,11 @@ def get_label_texts(dbpedia_disciplines: pd.DataFrame, for_linking: dict, tokeni
     and returns a dictionary of 
     { FoR: textual features of the label }
 
-    The textual features consist of: 
-    1. The label from the ORKG taxonomy 
-    2. The label from the linked DBpedia entity
-    3. The abstract from the linked DBpedia entity
+    The textual features consist of:
+    1. The label from the linked DBpedia entity
+    2. The comment from the linked DBpedia entity
 
-    If the taxonomy label is linked to more than one DBpedia entity, (2) and (3) are repeated. 
+    If the taxonomy label is linked to more than one DBpedia entity, (1) and (2) are repeated.
     Each two texts are seperated by the token [SEP]. 
     """
 
