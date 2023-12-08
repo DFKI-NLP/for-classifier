@@ -97,38 +97,49 @@ def get_dataset(binary_datapoint, dataset, taxonomy_texts, taxonomy_embeddings, 
     class_idx = binary_datapoint[0][1]
     label = binary_datapoint[1]
 
-    # 1. get tokenized document text
-    tokenized_document_text = dataset['document_text'][dataset_idx]
+    # 1. get document text
+    document_text = dataset['document_text'][dataset_idx]
 
-    # 2. get tokenized class text (i.e. ORKG label[SEP]DBpedia label(s)[SEP]DBpedia abstract(s))
-    tokenized_class_text = taxonomy_texts[classes_mapping_rev[class_idx]]
+    # 2. get DBpedia class text (i.e. DBpedia label(s)[SEP]DBpedia comment(s))
+    class_text = taxonomy_texts[classes_mapping_rev[class_idx]]
 
-    # 3. get class DBpedia embedding
+    # 3. get ORKG class label 
+    orkg_class_text = classes_mapping_rev[class_idx]
+
+    # 4. get class DBpedia embedding
     class_dbpedia_KGE = taxonomy_embeddings[classes_mapping_rev[class_idx]].astype(np.float64)
 
-    return tokenized_document_text, tokenized_class_text, class_dbpedia_KGE, label
+    # 5. get class categorical number (for baseline)
+    class_cat = np.asarray([class_idx])
+
+
+    return document_text, class_text, orkg_class_text, class_dbpedia_KGE, class_cat, label
 
 
 def get_classifier_data(binary_dataset, dataset, taxonomy_texts, taxonomy_embeddings, labels_mapping):
     document_text_list = []
-    class_text_list = []
+    class_dbpedia_text_list = []
+    class_orkg_text_list = []
     class_kge_list = []
+    class_cat_list = []
     label_list = []
 
     classes_mapping_rev = dict((v, k) for k, v in labels_mapping.items())
 
     for data_point in binary_dataset:
-        document_text, class_text, class_dbpedia_KGE, label = get_dataset(data_point,
+        document_text, class_text, orkg_class_text, class_dbpedia_KGE, class_cat, label = get_dataset(data_point,
                                                                           dataset,
                                                                           taxonomy_texts,
                                                                           taxonomy_embeddings,
                                                                           classes_mapping_rev)
         document_text_list.append(document_text)
-        class_text_list.append(class_text)
+        class_dbpedia_text_list.append(class_text)
+        class_orkg_text_list.append(orkg_class_text)
         class_kge_list.append(class_dbpedia_KGE)
+        class_cat_list.append(class_cat)
         label_list.append(label)
 
-    return document_text_list, class_text_list, class_kge_list, label_list
+    return document_text_list, class_dbpedia_text_list, class_orkg_text_list, class_kge_list, class_cat_list, label_list
 
 
 def main():
@@ -146,20 +157,22 @@ def main():
     taxonomy_texts = torch.load('data/taxonomy_texts.pt')
     taxonomy_embeddings = torch.load('data/taxonomy_embeddings.pt')
 
-    document_text_list, class_text_list, class_kge_list, label_list = get_classifier_data(binary_data,
+    document_text_list, class_dbpedia_text_list, class_orkg_text_list, class_kge_list, class_cat_list, label_list = get_classifier_data(binary_data,
                                                                                           cleaned_data,
                                                                                           taxonomy_texts,
                                                                                           taxonomy_embeddings,
                                                                                           labels_mapping)
 
-    print("Constructed input for classifier successfully!")
+    print("Constructed input for binary classifier successfully!")
 
-    torch.save(document_text_list, 'data/classifier/documents_text.pt')
-    torch.save(class_kge_list, 'data/classifier/class_kges.pt')
-    torch.save(class_text_list, 'data/classifier/class_texts.pt')
+    torch.save(document_text_list, 'data/classifier/document_text_list.pt')
+    torch.save(class_dbpedia_text_list, 'data/classifier/class_texts_dbpedia_only.pt')
+    torch.save(class_orkg_text_list, 'data/classifier/class_texts_orkg_only.pt')
+    torch.save(class_kge_list, 'data/classifier/class_new_KGEs.pt')
+    torch.save(class_cat_list, 'data/classifier/class_category_list.pt')
     torch.save(label_list, 'data/classifier/labels.pt')
 
-    print("Saved data under ../data/classifier/")
+    print("Saved data under /data/classifier/")
 
 
 if __name__ == '__main__':
