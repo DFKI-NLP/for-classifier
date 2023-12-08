@@ -132,7 +132,7 @@ def get_classifier_data(binary_dataset, dataset, taxonomy_texts, taxonomy_embedd
 
 
 def main():
-    data = pd.read_csv('~/documents/forc_I_dataset_FINAL_September.csv')
+    data = pd.read_csv('data/forc_I_dataset_FINAL_September.csv')
     cleaned_data = clean_data(data)
     print("Cleaned data...")
 
@@ -140,11 +140,11 @@ def main():
     binary_data, labels_mapping = get_binary_dataset(cleaned_data)
     # shuffle data
     random.shuffle(binary_data)
-    torch.save(binary_data, '../data/classifier/binary_data.pt')
-    print("Constructed binary dataset...")
+    torch.save(binary_data, 'data/classifier/binary_data.pt')
+    print("Constructed binary dataset and saved in data/classifier/binary_data.pt...")
 
-    taxonomy_texts = torch.load('../data/taxonomy_texts.pt')
-    taxonomy_embeddings = torch.load('../data/taxonomy_embeddings.pt')
+    taxonomy_texts = torch.load('data/taxonomy_texts.pt')
+    taxonomy_embeddings = torch.load('data/taxonomy_embeddings.pt')
 
     document_text_list, class_text_list, class_kge_list, label_list = get_classifier_data(binary_data,
                                                                                           cleaned_data,
@@ -154,10 +154,10 @@ def main():
 
     print("Constructed input for classifier successfully!")
 
-    torch.save(document_text_list, '../data/classifier/documents_text.pt')
-    torch.save(class_kge_list, '../data/classifier/class_kges.pt')
-    torch.save(class_text_list, '../data/classifier/class_texts.pt')
-    torch.save(label_list, '../data/classifier/labels.pt')
+    torch.save(document_text_list, 'data/classifier/documents_text.pt')
+    torch.save(class_kge_list, 'data/classifier/class_kges.pt')
+    torch.save(class_text_list, 'data/classifier/class_texts.pt')
+    torch.save(label_list, 'data/classifier/labels.pt')
 
     print("Saved data under ../data/classifier/")
 

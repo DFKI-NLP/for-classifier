@@ -65,7 +65,7 @@ def get_taxonomy_embeddings(dbpedia_embeddings: pd.DataFrame, linked_taxonomy: d
 
 
 def main():
-    linked_taxonomy = torch.load('../../data/linked_taxonomy.pt')
+    linked_taxonomy = torch.load('data/linked_taxonomy.pt')
 
     entities = get_list_of_entities(linked_taxonomy)
 
@@ -95,7 +95,7 @@ def main():
     taxonomy_embeddings = get_taxonomy_embeddings(dbpedia_embeddings, linked_taxonomy)
     print('Successfully embedded taxonomy labels!')
 
-    torch.save(taxonomy_embeddings, '../../data/taxonomy_embeddings.pt')
+    torch.save(taxonomy_embeddings, 'data/taxonomy_embeddings.pt')
     print('Saved in "/data/taxonomy_embeddings.pt"')
 
 

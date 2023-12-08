@@ -31,35 +31,6 @@ def parse_author(name: str) -> list:
     return [last, first + ' ' + middle, title, suffix]
 
 
-def parse_authors(orkg_df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Takes the orkg_df and adds the column 'authors_parsed' with the same authors parsed in a list.
-    """
-    orkg_df['authors_parsed'] = ''
-    for index, row in orkg_df.iterrows():
-
-        if not pd.isna(row['author']):
-
-            if row['author'].startswith('['):
-                author_list = ast.literal_eval(row['author'])
-                authors_list_parsed = []
-                for author in author_list:
-                    authors_list_parsed.append(parse_author(author))
-                orkg_df.at[index, 'authors_parsed'] = authors_list_parsed
-
-            elif ',' in row['author']:
-                author_list = row['author'].split(',')
-                authors_list_parsed = []
-                for author in author_list:
-                    authors_list_parsed.append(parse_author(author))
-                orkg_df.at[index, 'authors_parsed'] = authors_list_parsed
-
-            else:
-                orkg_df.at[index, 'authors_parsed'] = parse_author(row['author'])
-
-    return orkg_df
-
-
 def change_author_format(authors_parsed):
     if type(authors_parsed) == float:
         return np.nan
@@ -166,33 +137,37 @@ def get_embeddings_for_binary_classifier(data, binary_data):
 
 def main():
     data = pd.read_csv('~/documents/forc_I_dataset_FINAL_September.csv')
-    data = parse_authors(data)
-
+    
     # add column to data with the following structure: ['Author1LastName FirstLetterOfFirstName.', 
     #                                                   'Author2LastName FirstLetterOfFirstName.', ..... ]
     data['authors_new_format'] = [change_author_format(row['authors_parsed']) for index, row in data.iterrows()]
+    print('Created new author formats...')
 
     # This is the created dictionary of {unique_author: a list the papers that are written by them} The idea is to
     # take this and for each author, its embedding would be the average SciNCL embedding of all the papers (the
     # embedding of each paper = its title+abstract embedding)
     author_dict = get_authors_dict(data)
+    print(f'Got list of {len(author_dict)} unique authors...')
 
     tokenizer = AutoTokenizer.from_pretrained('malteos/scincl')
     model = AutoModel.from_pretrained('malteos/scincl')
 
     # A dictionary of {unique_author: their embedding (the average of the title+abstract embedding of all their papers)}
     author_embedding_dict = get_author_embeddings(data, author_dict, tokenizer, model)
+    print('Got embeddings of unique authors...')
 
     # updated data with author embeddings for each row
     data = get_data_with_authors_embedding(data, author_embedding_dict)
 
     # get binary data (prepared in data_for_classifier.py)
-    binary_data = torch.load('../../data/classifier/binary_data.pt')
+    binary_data = torch.load('data/classifier/binary_data.pt')
 
+    print('Getting author embeddings for binary classifier...')
     # list of author embeddings according to binary dataset, to be used as input for the binary classifier
     author_embeddings_for_binary_classifier = get_embeddings_for_binary_classifier(data, binary_data)
 
-    torch.save(author_embeddings_for_binary_classifier, '../../data/classifier/authors_embeddings.pt')
+    torch.save(author_embeddings_for_binary_classifier, 'data/classifier/authors_embeddings.pt')
+    print('Successfully got embeddings and saved under data/classifier/authors_embeddings.pt...')
 
 
 if __name__ == '__main__':

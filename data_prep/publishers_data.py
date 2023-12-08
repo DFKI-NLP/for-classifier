@@ -5,6 +5,8 @@ import string
 from string import digits
 import torch
 
+from transformers import AutoTokenizer, AutoModel
+
 
 def clean_publisher(publisher):
     """
@@ -100,10 +102,12 @@ def main():
     data = pd.read_csv('~/documents/forc_I_dataset_FINAL_September.csv')
     # Add a column with clean (i.e. preprocessed) publishers
     data['clean_publisher'] = [clean_publisher(row['publisher']) for index, row in data.iterrows()]
+    print('Cleaned publisher data...')
 
     # Make a dictionary where the keys are the unique publishers 
     # and the values are a list of the indices where the publisher appears in the data
     publisher_dict = get_publisher_dict(data)
+    print(f'Got list of {len(publisher_dict)} unique publishers...')
 
     tokenizer = AutoTokenizer.from_pretrained('malteos/scincl')
     model = AutoModel.from_pretrained('malteos/scincl')
@@ -112,17 +116,20 @@ def main():
     # papers)}
 
     publisher_embedding_dict = get_publisher_embeddings(data, publisher_dict, tokenizer, model)
+    print('Got embeddings of unique publishers...')
 
     # updated data with author embeddings for each row
     data = get_data_with_publisher_embedding(data, publisher_embedding_dict)
 
     # get binary data (prepared in data_for_classifier.py)
-    binary_data = torch.load('../../data/classifier/binary_data.pt')
+    binary_data = torch.load('data/classifier/binary_data.pt')
 
+    print('Getting publisher embeddings for binary classifier...')
     # list of author embeddings according to binary dataset, to be used as input for the binary classifier
     publisher_embeddings_for_binary_classifier = get_embeddings_for_binary_classifier(data, binary_data)
 
-    torch.save(publisher_embeddings_for_binary_classifier, '../../data/classifier/publisher_embeddings.pt')
+    torch.save(publisher_embeddings_for_binary_classifier, 'data/classifier/publisher_embeddings.pt')
+    print('Successfully got embeddings and saved under data/classifier/publisher_embeddings.pt...')
 
 
 if __name__ == '__main__':

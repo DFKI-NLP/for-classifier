@@ -8,22 +8,6 @@ from zipfile import ZipFile
 import fileinput
 
 
-def get_list_of_entities(linked_taxonomy: dict) -> list:
-    """
-    A function that gets the linked taxonomy dictionary as an input and outputs a list of all unique DBpedia entities
-    """
-
-    entities = []
-
-    for key, value in linked_taxonomy.items():
-
-        for key2, value2 in value.items():
-            entities.append(key2)
-
-    entities = list(set(entities))
-
-    return entities
-
 
 def get_pretrained_embeddings(for_linking: dict, input_file: str) -> dict:
     """
@@ -94,9 +78,7 @@ def get_taxonomy_embeddings(dbpedia_embeddings: pd.DataFrame, linked_taxonomy: d
 
 
 def main():
-    linked_taxonomy = torch.load('../../data/linked_taxonomy.pt')
-
-    entities = get_list_of_entities(linked_taxonomy)
+    linked_taxonomy = torch.load('data/linked_taxonomy.pt')
 
     print("Getting pre-trained embeddings...")
     # Get dataset of pretrained embeddings from Zenodo: https://zenodo.org/records/6384728
@@ -112,7 +94,7 @@ def main():
     taxonomy_embeddings = get_pretrained_embeddings(linked_taxonomy, input_file)
     print('Successfully embedded taxonomy labels!')
 
-    torch.save(taxonomy_embeddings, '../../data/taxonomy_embeddings_pretrained.pt')
+    torch.save(taxonomy_embeddings, 'data/taxonomy_embeddings_pretrained.pt')
     print('Saved in "/data/taxonomy_embeddings_pretrained.pt"')
 
 
