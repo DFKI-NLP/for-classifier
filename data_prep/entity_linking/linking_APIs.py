@@ -128,13 +128,18 @@ class EntityLinkingAPIs:
                 'text': rf,
             }
             resp = req.post('https://labs.tib.eu/falcon/falcon2/api?mode=long&k=5&db=1', json=json_data)
-            falcon_api_results[rf] = ast.literal_eval(resp.text)
+            try:
+                result = ast.literal_eval(resp.text)
+            except:
+                result = ""
+            falcon_api_results[rf] = result
 
         falcon_results_dbpedia = {el: [] for el in labels}
 
         for key, value in falcon_api_results.items():
-            for element in value['entities_dbpedia']:
-                falcon_results_dbpedia[key].append(element['URI'])
+            if type(value) == dict:
+                for element in value['entities_dbpedia']:
+                    falcon_results_dbpedia[key].append(element['URI'])
 
         return falcon_results_dbpedia
 
