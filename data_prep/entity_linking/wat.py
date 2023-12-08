@@ -1,11 +1,11 @@
 import json
 import requests as req
 
+# Code taken from the WAT API documentation: https://sobigdata.d4science.org/web/tagme/wat-api
 class WATAnnotation:
     # An entity annotated by WAT
 
     def __init__(self, d):
-
         # char offset (included)
         self.start = d['start']
         # char offset (not included)
@@ -22,7 +22,6 @@ class WATAnnotation:
         # Wikpedia entity info
         self.wiki_id = d['id']
         self.wiki_title = d['title']
-        
 
     def json_dict(self):
         # Simple dictionary representation
@@ -33,7 +32,8 @@ class WATAnnotation:
                 'rho': self.rho,
                 'prior_prob': self.prior_prob
                 }
-    
+
+
 def wat_entity_linking(text):
     # Main method, text annotation with WAT entity linking system
     wat_url = 'https://wat.d4science.org/wat/tag/tag'
@@ -48,6 +48,7 @@ def wat_entity_linking(text):
 
     response = req.get(wat_url, params=payload)
     return [WATAnnotation(a) for a in response.json()['annotations']]
+
 
 def get_wat_annotations(wat_annotations):
     json_list = [w.json_dict() for w in wat_annotations]
