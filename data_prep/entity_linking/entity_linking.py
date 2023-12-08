@@ -26,7 +26,10 @@ http.client.HTTPConnection._http_vsn = 10
 http.client.HTTPConnection._http_vsn_str = 'HTTP/1.0'
 
 
-def get_academicDisciplines():
+def get_academicDisciplines() -> pd.DataFrame:
+    """
+    A function that gets the academic disciplines from DBpedia
+    """
     endpoint = "http://dbpedia.org/sparql"
 
     query = """
@@ -46,10 +49,15 @@ def get_academicDisciplines():
         }
     """
 
+    academicDisciplines = sparql_dataframe.get(endpoint, query)
+
     return academicDisciplines
 
 
-def divide_labels(for_list):
+def divide_labels(for_list: list) -> tuple:
+    """
+    A function that takes a list of labels as input and returns a tuple of two lists: complex and non-complex labels.
+    """
     complex_labels = []
     non_complex_labels = []
 
@@ -63,7 +71,7 @@ def divide_labels(for_list):
     return complex_labels, non_complex_labels
 
 
-def get_labels_list(complex_label_doc):  # input is the label after it gets processed with spacy. E.g. doc = nlp(label)
+def get_labels_list(complex_label_doc) -> list:
     """ 
     A function that gets a spacy nlp document as input (which represent the complex label)
     and returns a list of strings that contains the simplified labels
@@ -77,7 +85,7 @@ def get_labels_list(complex_label_doc):  # input is the label after it gets proc
         if token.dep_ == 'compound' or token.dep_ == 'amod' or token.dep_ == 'nmod':
             # If so, add it to the list of new simplified labels
             labels.append(token.text + ' ' + token.head.text)
-            # Add its childred to the list of children of compounds/modifiers
+            # Add its children to the list of children of compounds/modifiers
             labels_children.append([str(child) for child in token.children])
 
     # get the original complex label text
@@ -98,13 +106,17 @@ def get_labels_list(complex_label_doc):  # input is the label after it gets proc
                         labels.append(token + ' ' + labels[idx].split(" ")[-1])
             else:
                 # If it is not one of the children and does not appear in conjunction to any of the 
-                # first words in other simplified labels, Add it as a separate token
+                # first words in other simplified labels, add it as a separate token
                 labels.append(token)
 
     return labels
 
 
-def simplify_complex_labels(complex_labels):
+def simplify_complex_labels(complex_labels: list) -> dict:
+    """
+    A function that takes a list of complex labels as input and returns a dictionary of complex labels as keys
+    with their simplified labels as values.
+    """
     nlp = spacy.load("en_core_web_lg")  # lg gives better results than sm or md
 
     # Iterate ove the complex labels and for each one get a list of its simplified labels
