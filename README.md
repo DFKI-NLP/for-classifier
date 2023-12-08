@@ -126,6 +126,6 @@ python models/kge-authors-publishers-classifier.py
 | Titles + Abstracts + Publishers           | DBpedia Text + KGEs | 92.25     | 93.52     | 92.88     | 96.43     |
 | Titles + Abstracts + Authors + Publishers | DBpedia Text + KGEs | 93.28     | 92.51     | 92.90     | 96.43     |
 
-Additional graphs and comparisons between the models can be seen at: https://api.wandb.ai/links/raya-abu-ahmad/ykbq4ke4. 
+#### Additional graphs and comparisons between the models can be viewed at: https://api.wandb.ai/links/raya-abu-ahmad/ykbq4ke4. 
 
 
