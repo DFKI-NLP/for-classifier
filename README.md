@@ -46,7 +46,7 @@ python data_prep/entity_linking/entity_linking.py
 python data_prep/entity_embeddings/get_kges_pretrained.py
 ```
 
-  Alternatively, KGEs can be constructed using [pyRDF2Vec](https://github.com/IBCNServices/pyRDF2Vec), which is a process that takes less time. However, the models perform better using the pre-trained embeddings as opposed to using pyRDF2Vec.
+  Alternatively, KGEs can be constructed using [pyRDF2Vec](https://github.com/IBCNServices/pyRDF2Vec). This process will take ca. 2 hours and does not need an external dataset. However, the models perform better using the pre-trained embeddings as opposed to using pyRDF2Vec.
   
 ```commandline
 python data_prep/entity_embeddings/get_kges_pyrdf2vec.py
