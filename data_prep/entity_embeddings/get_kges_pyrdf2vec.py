@@ -32,6 +32,10 @@ def get_list_of_entities(linked_taxonomy: dict) -> list:
 
 
 def get_taxonomy_embeddings(dbpedia_embeddings: pd.DataFrame, linked_taxonomy: dict) -> dict:
+    """
+    A function that gets the DBpedia embeddings dataframe and the linked taxonomy dictionary as an input and outputs a
+    dictionary with the taxonomy labels as keys and the embeddings of the DBpedia entities linked to them as values
+    """
     # Create an empty dictionary with taxonomy labels as keys
     default_list = []
     taxonomy_embeddings = {key: default_list[:] for key in linked_taxonomy}
