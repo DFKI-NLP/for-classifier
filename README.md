@@ -98,10 +98,20 @@ python models/kge-authors-publishers-classifier.py
 
 ## Results
 
-<p align="center">
-  <img src="https://github.com/ryabhmd/for-classifier/assets/77779090/a0038c81-e08e-415b-a542-c01ae95c2938" height="600" width="600"/>
-
-</p>
+| Publication Features                      | Class Features      | Precision | Recall    | F1        | Accuracy  |
+|-------------------------------------------|---------------------|-----------|-----------|-----------|-----------|
+| **Baseline**                              |                     |           |           |           |           |
+| Titles + Abstracts                        | Categorical Encoder | 0.0       | 0.0       | 0.0       | 74.85     |
+| **Embedding Class Labels with SciNCL**    |                     |           |           |           |           |
+| Titles + Abstracts                        | ORKG Labels Text    | 93.54     | 93.80     | 93.67     | 96.83     |
+| **Injecting DBpedia Class Features**      |                     |           |           |           |           |
+| Titles + Abstracts                        | DBpedia Text        | **93.55** | **94.11** | **93.83** | **96.91** |
+| Titles + Abstracts                        | KGEs                | 75.83     | 29.39     | 42.36     | 80.00     |
+| Titles + Abstracts                        | DBpedia Text + KGEs | 93.18     | 93.19     | 93.18     | 96.60     |
+| **Adding Publication Metadata**           |                     |           |           |           |           |
+| Titles + Abstracts + Authors              | DBpedia Text + KGEs | 93.20     | 92.02     | 92.61     | 96.32     |
+| Titles + Abstracts + Publishers           | DBpedia Text + KGEs | 92.25     | 93.52     | 92.88     | 96.43     |
+| Titles + Abstracts + Authors + Publishers | DBpedia Text + KGEs | 93.28     | 92.51     | 92.90     | 96.43     |
 
 Additional graphs and comparisons between the models can be seen at: https://api.wandb.ai/links/raya-abu-ahmad/ykbq4ke4. 
 
