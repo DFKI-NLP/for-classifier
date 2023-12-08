@@ -25,7 +25,11 @@ def get_list_of_entities(linked_taxonomy: dict) -> list:
     return entities
 
 
-def get_pretrained_embeddings(linked_taxonomy: dict, input_file: str) -> dict:
+def get_pretrained_embeddings(for_linking: dict, input_file: str) -> dict:
+    """
+    A function that gets the linked taxonomy dictionary and the path to the pretrained embeddings as an input and outputs
+    a dictionary with the taxonomy labels as keys and their embeddings as values
+    """
     entities = []
 
     for key, value in for_linking.items():
@@ -57,6 +61,10 @@ def get_pretrained_embeddings(linked_taxonomy: dict, input_file: str) -> dict:
 
 
 def get_taxonomy_embeddings(dbpedia_embeddings: pd.DataFrame, linked_taxonomy: dict) -> dict:
+    """
+    A function that gets the linked taxonomy dictionary and the DBpedia embeddings as an input and outputs a dictionary
+    with the taxonomy labels as keys and their embeddings as values
+    """
     # Create an empty dictionary with taxonomy labels as keys
     default_list = []
     taxonomy_embeddings = {key: default_list[:] for key in linked_taxonomy}
