@@ -6,8 +6,6 @@
 
 ## Description
 
-This repository holds the code for my master's thesis project, which investigates classifying scholarly articles into research fields by exploring knowledge injection approaches. The full thesis can be accessed [here](https://drive.google.com/file/d/1ga4mBRSt6WbY8TXBM1BgQGClyzWyq1dW/view?usp=sharing) for more detailed information. 
-
 There are different models in the ```models``` directory that utilise different features from scholarly articles: 
 - Titles + abstracts
 - Authors
@@ -125,7 +123,4 @@ python models/kge-authors-publishers-classifier.py
 | Titles + Abstracts + Authors              | DBpedia Text + KGEs | 93.20     | 92.02     | 92.61     | 96.32     |
 | Titles + Abstracts + Publishers           | DBpedia Text + KGEs | 92.25     | 93.52     | 92.88     | 96.43     |
 | Titles + Abstracts + Authors + Publishers | DBpedia Text + KGEs | 93.28     | 92.51     | 92.90     | 96.43     |
-
-#### Additional graphs and comparisons between the models can be viewed at: https://api.wandb.ai/links/raya-abu-ahmad/ykbq4ke4. 
-
 
