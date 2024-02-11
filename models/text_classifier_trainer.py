@@ -14,8 +14,6 @@ import evaluate
 
 device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
 tokenizer = AutoTokenizer.from_pretrained('malteos/scincl')
-wandb.init(project="pairwise-classifier-trainer", entity="raya-abu-ahmad")
-
 
 def tokenize_function(example):
     return tokenizer(example["document_text"],
