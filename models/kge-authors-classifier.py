@@ -16,8 +16,6 @@ import evaluate
 
 device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
 tokenizer = AutoTokenizer.from_pretrained('malteos/scincl')
-wandb.init(project="authors-classifier-trainer", entity="raya-abu-ahmad")
-
 
 class MyConfig(PretrainedConfig):
     model_type = 'mymodel'
