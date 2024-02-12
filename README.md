@@ -26,7 +26,7 @@ All data required for running the classifiers are available for download at: [ht
 #### Construct dataset
 
 This repository also contains the code for creating the data in the link above (including linking ORKG labels to DBpedia entities) under the ```data_prep``` directory. 
-The data is prepared by using the nfdi4ds dataset for the field of research classification (FoRC) shared task. The code for creating this dataset can be found [here](https://github.com/ryabhmd/nfdi4ds-forc). A link to download the dataset can be provided in order to run the steps below.  
+The data is prepared by using the nfdi4ds dataset for the field of research classification (FoRC) shared task. The code for creating this dataset can be found [here](https://anonymous.4open.science/r/forc-6312). A link to download the dataset can be provided in order to run the steps below.  
 
 1. Link the ORKG taxonomy to DBpedia entities:
 
