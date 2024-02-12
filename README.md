@@ -1,8 +1,6 @@
 
 
 # Investigating Knowledge Injection Approaches for Field of Research Classification of Scholarly Articles 
-![header](https://github.com/ryabhmd/for-classifier/assets/77779090/d06d9eb0-a581-4982-84b2-d68d3e09c72e)
-
 
 ## Description
 
@@ -23,7 +21,7 @@ The models also have different methods to semantically represent fields of resea
 
 #### Download pre-prepared dataset
 
-All data required for running the classifiers are available for download at: https://zenodo.org/records/10245830. After downloading, please save all ```.pt``` files under ```/data/classifier``` in order to be able to train and test the models.
+All data required for running the classifiers are available for download at: [https://zenodo.org/records/10245830](https://zenodo.org/records/10649951). After downloading, please save all ```.pt``` files under ```/data/classifier``` in order to be able to train and test the models.
 
 #### Construct dataset
 
