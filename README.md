@@ -1,4 +1,3 @@
-![Figures for Thesis](https://github.com/ryabhmd/for-classifier/assets/77779090/f6fbd96b-51e5-48f0-ab1b-f2e5c3cea0c1)
 
 # Investigating Knowledge Injection Approaches for Field of Research Classification of Scholarly Articles 
 ![header2](https://github.com/ryabhmd/for-classifier/assets/77779090/93b35a3b-ca94-4a46-af8b-860994af0d08)
